@@ -11,11 +11,11 @@ export class LoginComponent implements OnInit {
 
   myForm: FormGroup;
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder, private router: Router
   ) {
     this.myForm = new FormGroup({
-      name: new FormControl(''),
-      pwd: new FormControl('')
+      name: new FormControl('', Validators.required),
+      pwd: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
    }
 
@@ -23,5 +23,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  onSubmit() {
+    // Perform validation and login logic
 
+    // If the login is successful, navigate to the home page
+    this.router.navigate(['/home']);
+  }
 }

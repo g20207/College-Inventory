@@ -9,6 +9,10 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
+.form-control {
+  width: 300px !important;}
+
+
 .container{
 /* height: 200%; */
 align-content: center;
@@ -26,6 +30,13 @@ background-color: rgba(0,0,0,0.5) !important;
 font-size: 60px;
 margin-left: 10px;
 color: #FFC312;
+}
+
+.social_icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 450px !important;
+  margin-right: 95px !important;
 }
 
 .social_icon span:hover{
