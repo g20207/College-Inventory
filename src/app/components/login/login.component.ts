@@ -11,22 +11,20 @@ export class LoginComponent implements OnInit {
 
   myForm: FormGroup;
   constructor(
-    private formBuilder: FormBuilder, private router: Router
+    private fb: FormBuilder, private router: Router
   ) {
-    this.myForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      pwd: new FormControl('', [Validators.required, Validators.minLength(8)])
-    });
+
    }
 
   ngOnInit() {
-
+    this.myForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
   onSubmit() {
-    // Perform validation and login logic
-
-    // If the login is successful, navigate to the home page
     this.router.navigate(['/home']);
   }
 }

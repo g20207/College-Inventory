@@ -1,99 +1,149 @@
-
-@import url('https://fonts.googleapis.com/css?family=Numans');
-
-html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+.login {
+    height: 677px;
+    width: 100%;
+    background: radial-gradient(#653d84, #332042);
+    position: relative;
 }
-
-.form-control {
-  width: 300px !important;}
-
-
-.container{
-/* height: 200%; */
-align-content: center;
+.login_box {
+    width: 1050px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 4px 22px -8px #0004;
+    display: flex;
+    overflow: hidden;
 }
-
-.card{
-height: 622px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
-}
-
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
-}
-
-.social_icon {
-  display: flex;
-  justify-content: center;
-  margin-top: 450px !important;
-  margin-right: 95px !important;
-}
-
-.social_icon span:hover{
-color: white;
-cursor: pointer;
-}
-
-.card-header h3{
-color: white;
-}
-
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
-}
-
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
-}
-
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
+.login_box .left{
+  width: 41%;
+  height: 100%;
+  padding: 25px 25px;
 
 }
-
-.remember{
-color: white;
+.login_box .right{
+  width: 59%;
+  height: 100%
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.left .contact{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    width: 73%;
+    margin: auto;
+}
+.left h3{
+  text-align: center;
+  margin-bottom: 40px;
+}
+.left input {
+    border: none;
+    width: 80%;
+    margin: 15px 0px;
+    border-bottom: 1px solid #4f30677d;
+    padding: 7px 9px;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+}
+.left{
+	background: linear-gradient(-45deg, #dcd7e0, #fff);
+}
+.submit {
+    border: none;
+    padding: 15px 70px;
+    border-radius: 8px;
+    display: block;
+    margin: auto;
+    margin-top: 120px;
+    background: #583672;
+    color: #fff;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    -moz-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+
+/* IMAGE */
+.right {
+	background: linear-gradient(212.38deg, rgba(242, 57, 127, 0.7) 0%, rgba(175, 70, 189, 0.71) 100%),url(https://static.seattletimes.com/wp-content/uploads/2019/01/web-typing-ergonomics-1020x680.jpg);
+	color: #fff;
+	position: relative;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
+.right .right-text{
+  height: 100%;
+  position: relative;
+  transform: translate(0%, 45%);
+}
+.right-text h2{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 500;
+}
+.right-text h5{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 400;
 }
 
-.links{
-color: white;
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+@media screen and (max-width: 767px) {
+	.login {
+		height: auto;
+	}
+	.login_box {
+		flex-direction: column;
+		width: 100%;
+		height: auto;
+		top: initial;
+		left: initial;
+		transform: initial;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	.login_box .left {
+		width: 100%;
+		height: auto;
+		padding: 40px 20px;
+	}
+	.login_box .right {
+		width: 100%;
+		height: auto;
+	}
+	.left .contact {
+		width: 100%;
+	}
+	.left input {
+		width: 100%;
+	}
+	.submit {
+		margin-top: 30px;
+	}
+	.right-text {
+		position: static;
+		transform: initial;
+		padding: 30px;
+	}
+	.right-text h2 {
+		font-size: 40px;
+	}
+	.right-text h5 {
+		font-size: 16px;
+		margin-top: 10px;
+	}
 }
 
-.links a{
-margin-left: 4px;
-}
+
