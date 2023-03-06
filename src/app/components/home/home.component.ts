@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,11 @@ export class HomeComponent implements OnInit {
   //   // name: new FormControl('')
   // });
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
+  onClick() {
+    this.router.navigate(['/add']);
+  }
 }

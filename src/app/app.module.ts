@@ -13,6 +13,7 @@ import { NavpageComponent } from './components/navpage/navpage.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TopbarComponent } from './components/topbar/topbar.component';
     FiltersComponent,
     NavpageComponent,
     HomeComponent,
-    TopbarComponent
+    TopbarComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,

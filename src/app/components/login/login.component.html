@@ -3,7 +3,7 @@
 		<div class="login_box">
 			<div class="left">
 				<div class="contact">
-          <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="loginForm">
             <h3>Log In</h3>
             <input type="text" placeholder="USERNAME" formControlName="name">
             <div *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">
@@ -14,7 +14,7 @@
               <div class="alert alert-danger" *ngIf="myForm.controls.password.errors.required">Password is required</div>
               <div class="alert alert-danger" *ngIf="myForm.controls.password.errors?.minlength">Password should have at least 8 characters</div>
             </div>
-            <button class="submit">submit</button>
+            <button class="submit" (click)="SubmitBtn()">submit</button>
           </form>
 				</div>
 			</div>
