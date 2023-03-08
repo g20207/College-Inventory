@@ -2,11 +2,8 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 /* imports a font from Google Fonts called "Titillium Web" with a font weight of 300 (which is a light weight).  */
 
-.fa-2x {
-font-size: 2em;
-}
 .fa {
-position: relative;
+/* position: relative; */
 display: table-cell;
 width: 60px;
 height: 36px;
@@ -23,12 +20,8 @@ overflow:visible;
 
 .main-menu {
 background:#212121;
-border-right:1px solid #e5e5e5;
 position:fixed;
-top:0;
-bottom:0;
 height:100%;
-left:0;
 width:60px;
 overflow:hidden;
 -webkit-transition:width .10s linear;
@@ -80,7 +73,7 @@ position:relative;
 display:table-cell;
 vertical-align:middle;
 width:190px;
-  font-family: 'Titillium Web', sans-serif;
+font-family: 'Titillium Web', sans-serif;
 }
 
 .main-menu>ul.logout {

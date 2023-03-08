@@ -1,0 +1,41 @@
+<form class="form-group" [formGroup]="campusForm" (ngSubmit)="onSubmit()">
+  <div class="input-camp">
+    <input type="text" id="campus" name="campus" class="form-control" placeholder="Enter your campus" formControlName="campus" required>
+    <button type="submit" class="btn-add-campus">Add Campus</button>
+  </div>
+  <div class="error-container" *ngIf="campusForm.get('campus').invalid && (campusForm.get('campus').dirty || campusForm.get('campus').touched)">
+    <div *ngIf="campusForm.get('campus').errors.required" style="color:red">
+      *Campus is required.
+    </div>
+    <div *ngIf="campusForm.get('campus').errors.minlength" style="color:red">
+      *Campus must be at least 3 characters long.
+    </div>
+  </div>
+</form>
+
+<!-- table -->
+<div class="container-table100">
+  <!-- below class is for responsiveness -->
+<div class="wrap-table100">
+<table>
+<thead class="row-heading">
+<tr class="table100-head">
+<th class="column1 row-heading-th-tag ">S.No.</th>
+<th class="column2 row-heading-th-tag">Campus</th>
+<th class="column3 row-heading-th-tag">Edit</th>
+<th class="column3 row-heading-th-tag">Delete</th>
+</tr>
+</thead>
+<tbody>
+
+<tr *ngFor="let item of getForm; let i = index">
+<td class="column1">{{ i + 1 }}</td>
+<td class="column2">{{ item }}</td>
+<td class="column3"> <i class="fa-solid fa-pen-to-square"></i></td>
+<td class="column4"><i  class="fa-solid fa-trash-arrow-up"></i></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- table ends -->
