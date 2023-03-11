@@ -1,141 +1,151 @@
- /* Style the label */
- .form-group{
-  margin-top: 30px;
-  margin-left: 115px;
-}
-
-/* Style the input field container */
-.input-camp {
+/* breadcrumb */
+.breadcrumb {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 25rem; /* Set a maximum width for the container */
-  margin-bottom: 0.5rem;
-}
-
-/* Style the input field */
-input[type="text"] {
-  flex: 1;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  height: 2.5rem;
-}
-
-/* Style the input field when it has focus */
-input[type="text"]:focus {
-  outline: none;
-  border-color: #2d9cdb;
-  box-shadow: 0 0 0 0.2rem rgba(45, 156, 219, 0.25);
-}
-
-/* Style the input field placeholder text */
-::placeholder {
-  color: #999;
-}
-
-/* Style the "Add Campus" button */
-.btn-add-campus {
-  background-color: #4caf50;
-  color: #fff;
-  padding: 0.3rem 1rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 4px;
-  box-sizing: border-box;
-  height: 2.5rem;
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-
-/* Style the "Add Campus" button on hover */
-.btn-add-campus:hover {
-  background-color: #3e8e41;
-}
-
-/* Style the input field and "Add Campus" button on small screens */
-@media (max-width: 768px) {
-  .label-camp {
-    display: block;
-    margin-right: 0;
-  }
-  .input-camp {
-    flex-direction: column;
-    width: 100%;
-    max-width: none;
-  }
-  input[type="text"], .btn-add-campus {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 0.5rem;
-  }
-}
-/* css for table */
-.container-table100 {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.wrap-table100 {
-  width: 100%;
-  overflow-x: auto; /* Add horizontal scroll for small screens */
-}
-
-.table100 {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.table100-head th {
-  font-size: 18px;
-  color: #fff;
-  line-height: 1.2;
-  font-weight: unset;
-  text-align: left;
-  padding: 16px;
-  background-color: #05105d;
-}
-
-.table100-body td {
-  font-size: 14px;
-  line-height: 1.2;
-  font-weight: unset;
-  padding: 16px;
-  border-bottom: 1px solid #e6e6e6;
   background-color: #fff;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #666;
+  margin-left: 70px;
+
 }
 
-/* Responsive styles */
+.breadcrumb-heading {
+  font-weight: bold;
+}
+
+.breadcrumb-path {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+}
+
+/* table heading with search and add  */
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+  font-size: 1.2rem;
+  width:1165px;
+  margin-left: 16px;
+  width:900px;
+}
+
+.table-header h2 {
+  margin: 0;
+}
+
+.table-controls {
+  display: flex;
+  align-items: center;
+}
+/* spacing between search bar and add  button */
+.table-controls form {
+  margin-right: 10px;
+}
+
+.table-controls button.add-button {
+  margin-left: 10px;
+}
+/* spacing between search bar and add  button ends*/
+
+
+.table-controls form {
+  margin-right: 10px;
+}
+
+.table-controls input[type="text"] {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  width: 200px;
+}
+/* .fa-search{
+  background-color: transparent !important;
+  border:none;
+} */
+.lens {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FFFFFF;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.add-button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+/* .table-controls button:hover {
+  background-color: #0e120e;
+}
+
+.add-button:hover {
+  background-color: #006080;
+} */
+
 @media (max-width: 768px) {
-  .table100-head th {
-    font-size: 14px;
-    padding: 10px;
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .table100-body td {
-    font-size: 12px;
-    padding: 10px;
+  .table-controls {
+    margin-top: 10px;
+  }
+
+  .table-controls input[type="text"] {
+    width: 100%;
   }
 }
+/* table heading with search and add end */
 
+.container-table100 {
+  position: fixed;
+  top: -110px;
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0px 0px 30px 55px;
+}
+/* width of the table */
 .wrap-table100 {
-  width: 1170px
+  width: 904px;
 }
 
-table {
+.mytable {
   border-spacing: 1;
   border-collapse: collapse;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
-  margin: 0 auto;
+  margin-top: 0px;
   position: relative;
 }
 
@@ -145,7 +155,7 @@ table * {
 
 table td,
 .row-heading-th-tag {
-  padding-left: 20px;
+  padding-left: 8px;
 }
 
 .row-heading tr {
@@ -331,7 +341,3 @@ tbody tr:hover {
       padding-right: 15px
   }
 }
-
-
-/* css for table ends*/
-
