@@ -8,7 +8,7 @@
 <!-- input and display table grid -->
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;">
+    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:200px;">
       <!-- getting campus as input -->
       <form class="panel panel-default" [formGroup]="campusForm">
         <div class="panel-body bg-gray">
@@ -64,11 +64,8 @@
               <tr *ngFor="let item of campList; let i = index">
                 <td class="column1">{{ i + 1 }}</td>
                 <td class="column2">{{item.campus}}</td>
-                <td class="column3"> <i
-                  (click)="getStudentdetails(item.rno)"
-                  class="fa-solid fa-pen-to-square"
-                ></i></td>
-                <td class="column4"><i (click)="deleteItem(i)" class="fa-solid fa-trash-arrow-up"></i>
+                <td class="column3"> <i (click)="edit(i)" class="fa-solid fa-pen-to-square"></i></td>
+                <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
               </tr>
             </tbody>

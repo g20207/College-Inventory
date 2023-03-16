@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
   FormControl,
@@ -6,9 +7,9 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
 
-// import {ApiService} from '/services/api.service';
 @Component({
   selector: "app-campus",
   templateUrl: "./campus.component.html",
@@ -35,18 +36,18 @@ export class CampusComponent implements OnInit {
   }
   add() {
     if (this.campusForm.invalid) {
-      // console.log("error occured !")
+      console.log("error occured !")
     } else {
       var get = this.campusForm.value;
       this.makeapi
         .addItem("campus", get)
-        .then((data) => {})
-        .catch((Response) => {
-          this.list();
-        });
+        // .then((data) => {})
+        // .catch((Response) => {
+        //   this.list();
+        // });
     }
   }
-  campList:any=[]
+  campList:any=[];
   list() {
     this.makeapi.listItem("campus").subscribe((res) => {
       this.campList = res.map((e: any) => {
@@ -57,4 +58,13 @@ export class CampusComponent implements OnInit {
       console.log(this.campList);
     });
   }
+
+  edit(){
+  }
+
+  remove(i){
+    this.makeapi.deleteItem("campus", i);
+
+  }
+
 }
