@@ -15,6 +15,14 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { AddComponent } from './components/add/add.component';
 import { CampusComponent } from './components/campus/campus.component';
 import { FloorComponent } from './components/floor/floor.component';
+import { HttpClientModule } from  '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {DataService} from './services/data.service';
+import {ApiService} from './services/api.service';
+import {firebase} from '../environments/firebase';
 
 @NgModule({
   declarations: [
@@ -34,9 +42,14 @@ import { FloorComponent } from './components/floor/floor.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebase),
+    AngularFireStorageModule,
+    AngularFirestoreModule 
   ],
-  providers: [],
+  providers: [DataService,ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

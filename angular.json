@@ -117,5 +117,8 @@
         }
       }
     }},
-  "defaultProject": "CollegeInventory"
+  "defaultProject": "CollegeInventory",
+  "cli": {
+    "analytics": "b36e5b85-918f-42a4-84b0-883bdb76ba0b"
+  }
 }

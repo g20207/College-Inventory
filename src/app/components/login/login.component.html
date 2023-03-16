@@ -6,13 +6,13 @@
           <form [formGroup]="loginForm">
             <h3>Log In</h3>
             <input type="text" placeholder="USERNAME" formControlName="name">
-            <div *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">
-              <div class="alert alert-danger" *ngIf="myForm.controls.name.errors.required">Username is required</div>
+            <div *ngIf="loginForm.controls.name.invalid && (loginForm.controls.name.dirty || loginForm.controls.name.touched)">
+              <div class="alert alert-danger" *ngIf="loginForm.controls.name.errors.required">Username is required</div>
             </div>
             <input type="text" placeholder="PASSWORD" formControlName="password">
-            <div *ngIf="myForm.controls.password.invalid && (myForm.controls.password.dirty || myForm.controls.password.touched)">
-              <div class="alert alert-danger" *ngIf="myForm.controls.password.errors.required">Password is required</div>
-              <div class="alert alert-danger" *ngIf="myForm.controls.password.errors?.minlength">Password should have at least 8 characters</div>
+            <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+              <div class="alert alert-danger" *ngIf="loginForm.controls.password.errors.required">Password is required</div>
+              <div class="alert alert-danger" *ngIf="loginForm.controls.password.errors?.minlength">Password should have at least 8 characters</div>
             </div>
             <button class="submit" (click)="SubmitBtn()">submit</button>
           </form>

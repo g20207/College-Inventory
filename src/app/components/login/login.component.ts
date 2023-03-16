@@ -26,10 +26,9 @@ export class LoginComponent implements OnInit {
   SubmitBtn() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      debugger;
     } else {
-      debugger;
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/campus"]);
+      
     }
   }
 }
