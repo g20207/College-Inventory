@@ -28,6 +28,7 @@
   box-sizing: border-box;
 }
 
+
 /* table heading with search and add  */
 
 .table-header {
@@ -39,8 +40,8 @@
   border-bottom: 1px solid #ccc;
   font-size: 1.2rem;
   width:1165px;
-  margin-left: 16px;
-  width:900px;
+  margin-left: 0.5px;
+  width:830px;
 }
 
 .table-header h2 {
@@ -65,7 +66,7 @@
 .table-controls form {
   margin-right: 10px;
 }
-
+/* search bar */
 .table-controls input[type="text"] {
   padding: 5px;
   border-radius: 5px;
@@ -118,7 +119,7 @@
 }
 /* table heading with search and add end */
 
-.container-table100 {
+/* .container-table100 {
   position: fixed;
   top: -110px;
   width: 100%;
@@ -132,7 +133,7 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 0px 0px 30px 55px;
-}
+} */
 /* width of the table */
 .wrap-table100 {
   width: 904px;
@@ -144,8 +145,10 @@
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  width: 100%;
+  width: 97.5%;
   margin-top: 0px;
+  margin-left: 13px;
+  /* padding-left: 1000px; */
   position: relative;
 }
 
@@ -159,7 +162,7 @@ table td,
 }
 
 .row-heading tr {
-  height: 60px;
+  /* height: 60px; */
   /* background: #36304a; */
   background: rgb(128, 127, 127);
 }

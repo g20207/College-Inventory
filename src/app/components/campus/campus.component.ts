@@ -16,6 +16,7 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ["./campus.component.css"],
 })
 export class CampusComponent implements OnInit {
+  Afs: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -30,26 +31,41 @@ export class CampusComponent implements OnInit {
     });
   }
   campusForm: FormGroup;
+  getValue: any;
+  isEditMode:boolean = false;
 
   ngOnInit() {
     this.list();
   }
-  add() {
+  onSubmit() {
+    this.isEditMode = false;
     if (this.campusForm.invalid) {
       console.log("error occured !")
     } else {
       var get = this.campusForm.value;
       this.makeapi
         .addItem("campus", get)
-        // .then((data) => {})
-        // .catch((Response) => {
-        //   this.list();
-        // });
+        .then((data) => {})
+        .catch((Response) => {
+          this.list();
+        });
     }
+    this.campusForm.reset();
   }
+
+  onEdit(){
+    var get = this.campusForm.value;
+    this.makeapi.updateItem("campus",get);
+    this.isEditMode = false;
+    debugger
+    this.campusForm.reset();
+    this. list()
+  }
+
   campList:any=[];
   list() {
-    this.makeapi.listItem("campus").subscribe((res) => {
+    this.makeapi.listItem("campus")
+    .subscribe((res) => {
       this.campList = res.map((e: any) => {
         const data = e.payload.doc.data();
         data.id = e.payload.doc.id;
@@ -58,13 +74,19 @@ export class CampusComponent implements OnInit {
       console.log(this.campList);
     });
   }
+  edit(i){
+    this.isEditMode = true;
 
-  edit(){
+    this.makeapi.getItem("campus", i).subscribe((res) => {
+      this.getValue = res;
+      this.campusForm.patchValue(res);
+    }, (err) => {
+      console.log('error occured!');
+    });
   }
 
   remove(i){
     this.makeapi.deleteItem("campus", i);
-
   }
 
 }
