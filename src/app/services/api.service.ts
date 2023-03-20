@@ -60,6 +60,7 @@ export class ApiService {
     return this.Afs.collection('/' + url).doc(id).delete();
   }
   // image upload
+
   imageUpload(url, data) {
     return this.storage.upload(url, data)
   }

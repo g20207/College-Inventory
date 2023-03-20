@@ -17,8 +17,7 @@ import { ApiService } from "src/app/services/api.service";
 })
 export class BlockComponent implements OnInit {
   blockForm: FormGroup;
-
-  Afs: any;
+    Afs: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -26,43 +25,42 @@ export class BlockComponent implements OnInit {
     private makeapi: ApiService
   ) {
     this.blockForm = new FormGroup({
-    campus: new FormControl("", [Validators.required,Validators.minLength(3)]),
-    block: new FormControl("", [Validators.required,Validators.minLength(3)])
+    block: new FormControl("", [Validators.required,Validators.minLength(3)]),
+    selectedOption: new FormControl("", [Validators.required,Validators.minLength(3)])
     });
   }
-  getValue: any;
   isEditMode:boolean = false;
 
   ngOnInit() {
-    this.list();
+    this.camplist();
+    this.blocklist();
   }
   onSubmit() {
     this.isEditMode = false;
-    if (this.blockForm.invalid) {
-      console.log("error occured !")
-    } else {
+    // if (this.blockForm.invalid) {
+    //   console.log("error occured !")
+    // } else {
       var get = this.blockForm.value;
       this.makeapi
-        .addItem("campus", get)
+        .addItem("block", get)
         .then((data) => {})
         .catch((Response) => {
-          this.list();
+          this.camplist();
         });
-    }
+    // }
     this.blockForm.reset();
   }
 
-  onEdit(){
+  onUpdate(){
     var get = this.blockForm.value;
-    this.makeapi.updateItem("campus",get);
+    this.makeapi.updateItem("block",get);
     this.isEditMode = false;
-    debugger
     this.blockForm.reset();
-    this. list()
+    this.camplist();
   }
 
   campList:any=[];
-  list() {
+  camplist() {
     this.makeapi.listItem("campus")
     .subscribe((res) => {
       this.campList = res.map((e: any) => {
@@ -73,10 +71,23 @@ export class BlockComponent implements OnInit {
       console.log(this.campList);
     });
   }
+  blockList:any=[];
+  blocklist(){
+    this.makeapi.listItem("block")
+    .subscribe((res) => {
+      this.blockList = res.map((e: any) => {
+        const data = e.payload.doc.data();
+        data.id = e.payload.doc.id;
+        return data;
+      })
+      // console.log(this.blockList);
+    });
+  }
+  getValue: any;
   edit(i){
     this.isEditMode = true;
 
-    this.makeapi.getItem("campus", i).subscribe((res) => {
+    this.makeapi.getItem("block", i).subscribe((res) => {
       this.getValue = res;
       this.blockForm.patchValue(res);
     }, (err) => {
@@ -85,7 +96,7 @@ export class BlockComponent implements OnInit {
   }
 
   remove(i){
-    this.makeapi.deleteItem("campus", i);
+    this.makeapi.deleteItem("block", i);
   }
 
 }

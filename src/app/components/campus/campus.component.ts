@@ -86,7 +86,6 @@ export class CampusComponent implements OnInit {
   }
 
   remove(i){
-    this.makeapi.deleteItem("campus", i);
+    this.makeapi.deleteItem("campus",i);
   }
-
 }

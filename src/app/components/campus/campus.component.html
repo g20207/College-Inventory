@@ -63,7 +63,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of campList; let i = index">
+              <tr *ngFor="let item of campList; let i = index;let item2 of blockList">
                 <td class="column1">{{ i + 1 }}</td>
                 <td class="column2">{{item.campus}}</td>
                 <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>

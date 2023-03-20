@@ -23,7 +23,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {DataService} from './services/data.service';
 import {ApiService} from './services/api.service';
 import {firebase} from '../environments/firebase';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +47,8 @@ import {firebase} from '../environments/firebase';
     AngularFireAuthModule,
     AngularFireModule.initializeApp(firebase),
     AngularFireStorageModule,
-    AngularFirestoreModule 
+    AngularFirestoreModule,
+    FormsModule
   ],
   providers: [DataService,ApiService],
   bootstrap: [AppComponent]

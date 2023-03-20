@@ -1,3 +1,4 @@
+
 <!-- breadcrumb -->
 <div class="breadcrumb">
   <div class="breadcrumb-heading">BLOCK DETAILS</div>
@@ -8,15 +9,19 @@
 <!-- input and display table grid -->
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:299px;">
+    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:310px;">
       <!-- getting campus as input -->
       <form class="panel panel-default" [formGroup]="blockForm">
         <div class="panel-body bg-gray">
           <p><strong>ADD BLOCK</strong></p>
-          <label>Enter Campus:</label>
+          <label>Select Campus:</label>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter campus name" formControlName="campus">
-            <div style="color:red;"
+
+  <select formControlName="selectedOption" class="form-control caret">
+    <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
+  </select>
+            <!-- <input type="text" class="form-control" placeholder="Enter campus name" formControlName="campus"> -->
+            <!-- <div style="color:red;font-size: small;"
               *ngIf="blockForm.controls['campus'].invalid && (blockForm.controls['campus'].dirty || blockForm.controls['campus'].touched)">
               <div *ngIf="blockForm.controls['campus'].errors.required">
                 Campus name is required.
@@ -24,12 +29,12 @@
               <div *ngIf="blockForm.controls['campus'].errors.minlength">
                 Campus name must be at least 3 characters long.
               </div>
-            </div>
+            </div> -->
           </div>
-          <label>Enter Block:</label>
+         <label style="padding-top:10px;">Enter Block:</label>
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter block name" formControlName="block">
-            <div style="color:red;"
+            <div style="color:red;font-size: small;"
               *ngIf="blockForm.controls['block'].invalid && (blockForm.controls['block'].dirty || blockForm.controls['block'].touched)">
               <div *ngIf="blockForm.controls['block'].errors.required">
                 block name is required.
@@ -43,7 +48,7 @@
           <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:190px;"
             [disabled]="!blockForm.valid" (click)="onSubmit()">Add</button>
             <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:180px;"
-            [disabled]="!blockForm.valid" (click)="onEdit()" >Update</button>
+            [disabled]="!blockForm.valid" (click)="onUpdate()" >Update</button>
         </div>
       </form>
     </div>
@@ -78,10 +83,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of campList; let i = index">
+              <tr *ngFor="let item of blockList; let i = index;">
                 <td class="column1">{{ i + 1 }}</td>
-                <td class="column2">{{item.campus}}</td>
-                <td class="column2"></td>
+                <td class="column2">{{item.selectedOption}}</td>
+                <td class="column2">{{item.block}}</td>
                 <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
                 <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
