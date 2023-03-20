@@ -26,7 +26,7 @@ export class CampusComponent implements OnInit {
     this.campusForm = new FormGroup({
       campus: new FormControl("", [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(2),
       ]),
     });
   }

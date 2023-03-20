@@ -20,16 +20,6 @@
   <select formControlName="selectedOption" class="form-control caret">
     <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
   </select>
-            <!-- <input type="text" class="form-control" placeholder="Enter campus name" formControlName="campus"> -->
-            <!-- <div style="color:red;font-size: small;"
-              *ngIf="blockForm.controls['campus'].invalid && (blockForm.controls['campus'].dirty || blockForm.controls['campus'].touched)">
-              <div *ngIf="blockForm.controls['campus'].errors.required">
-                Campus name is required.
-              </div>
-              <div *ngIf="blockForm.controls['campus'].errors.minlength">
-                Campus name must be at least 3 characters long.
-              </div>
-            </div> -->
           </div>
          <label style="padding-top:10px;">Enter Block:</label>
           <div class="form-group">
@@ -40,7 +30,7 @@
                 block name is required.
               </div>
               <div *ngIf="blockForm.controls['block'].errors.minlength">
-                block name must be at least 3 characters long.
+                block name must be at least 2 characters long.
               </div>
             </div>
           </div>

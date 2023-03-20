@@ -25,8 +25,8 @@ export class BlockComponent implements OnInit {
     private makeapi: ApiService
   ) {
     this.blockForm = new FormGroup({
-    block: new FormControl("", [Validators.required,Validators.minLength(3)]),
-    selectedOption: new FormControl("", [Validators.required,Validators.minLength(3)])
+    block: new FormControl("", [Validators.required,Validators.minLength(2)]),
+    selectedOption: new FormControl("", [Validators.required,Validators.minLength(2)])
     });
   }
   isEditMode:boolean = false;
@@ -37,9 +37,6 @@ export class BlockComponent implements OnInit {
   }
   onSubmit() {
     this.isEditMode = false;
-    // if (this.blockForm.invalid) {
-    //   console.log("error occured !")
-    // } else {
       var get = this.blockForm.value;
       this.makeapi
         .addItem("block", get)
@@ -47,8 +44,7 @@ export class BlockComponent implements OnInit {
         .catch((Response) => {
           this.camplist();
         });
-    // }
-    this.blockForm.reset();
+      this.blockForm.reset();
   }
 
   onUpdate(){
@@ -68,7 +64,7 @@ export class BlockComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
-      console.log(this.campList);
+      // console.log(this.campList);
     });
   }
   blockList:any=[];
@@ -80,7 +76,7 @@ export class BlockComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
-      // console.log(this.blockList);
+      console.log(this.blockList);
     });
   }
   getValue: any;

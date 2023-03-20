@@ -1,7 +1,7 @@
 
 <!-- breadcrumb -->
 <div class="breadcrumb">
-  <div class="breadcrumb-heading">BLOCK DETAILS</div>
+  <div class="breadcrumb-heading">FLOOR DETAILS</div>
   <!-- <div class="breadcrumb-path">path1 &nbsp; &gt; &nbsp; path2</div> -->
 </div>
 <!-- breadcrumb ends -->
@@ -9,46 +9,41 @@
 <!-- input and display table grid -->
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:310px;">
+    <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:355px;">
       <!-- getting campus as input -->
-      <form class="panel panel-default" [formGroup]="blockForm">
+      <form class="panel panel-default" [formGroup]="floorForm">
         <div class="panel-body bg-gray">
-          <p><strong>ADD BLOCK</strong></p>
+          <p><strong>ADD FLOOR</strong></p>
           <label>Select Campus:</label>
           <div class="form-group">
-
-  <select formControlName="selectedOption" class="form-control caret">
+  <select formControlName="selectedCampus" class="form-control caret"  [(ngModel)]="selectedCampusValue" (change)="onCampusSelect()">
     <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
   </select>
-            <!-- <input type="text" class="form-control" placeholder="Enter campus name" formControlName="campus"> -->
-            <!-- <div style="color:red;font-size: small;"
-              *ngIf="blockForm.controls['campus'].invalid && (blockForm.controls['campus'].dirty || blockForm.controls['campus'].touched)">
-              <div *ngIf="blockForm.controls['campus'].errors.required">
-                Campus name is required.
-              </div>
-              <div *ngIf="blockForm.controls['campus'].errors.minlength">
-                Campus name must be at least 3 characters long.
-              </div>
-            </div> -->
           </div>
-         <label style="padding-top:10px;">Enter Block:</label>
+          <label>Select Block:</label>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter block name" formControlName="block">
+  <select formControlName="selectedBlock" class="form-control caret">
+      <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
+  </select>
+          </div>
+         <label style="padding-top:10px;">Enter Floor:</label>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter floor name" formControlName="floor">
             <div style="color:red;font-size: small;"
-              *ngIf="blockForm.controls['block'].invalid && (blockForm.controls['block'].dirty || blockForm.controls['block'].touched)">
-              <div *ngIf="blockForm.controls['block'].errors.required">
-                block name is required.
+              *ngIf="floorForm.controls['floor'].invalid && (floorForm.controls['floor'].dirty || floorForm.controls['floor'].touched)">
+              <div *ngIf="floorForm.controls['floor'].errors.required">
+                floor name is required.
               </div>
-              <div *ngIf="blockForm.controls['block'].errors.minlength">
-                block name must be at least 3 characters long.
+              <div *ngIf="floorForm.controls['floor'].errors.minlength">
+                Floor name must be at least 2 characters long.
               </div>
             </div>
           </div>
 
           <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:190px;"
-            [disabled]="!blockForm.valid" (click)="onSubmit()">Add</button>
+            [disabled]="!floorForm.valid" (click)="onSubmit()">Add</button>
             <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:180px;"
-            [disabled]="!blockForm.valid" (click)="onUpdate()" >Update</button>
+            [disabled]="!floorForm.valid" (click)="onUpdate()" >Update</button>
         </div>
       </form>
     </div>
@@ -64,7 +59,6 @@
               <button type="submit" class="lens"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <!-- <button (click)="onClick()" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button> -->
         </div>
       </div>
       <!-- table heading with search bar ends-->
@@ -78,15 +72,17 @@
                 <th class="column1 row-heading-th-tag ">S.No</th>
                 <th class="column2 row-heading-th-tag">Campus</th>
                 <th class="column2 row-heading-th-tag">Block</th>
+                <th class="column2 row-heading-th-tag">Floor</th>
                 <th class="column3 row-heading-th-tag">Edit</th>
                 <th class="column4 row-heading-th-tag">Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of blockList; let i = index;">
+              <tr *ngFor="let item of floorList; let i = index;">
                 <td class="column1">{{ i + 1 }}</td>
-                <td class="column2">{{item.selectedOption}}</td>
-                <td class="column2">{{item.block}}</td>
+                <td class="column2">{{item.selectedCampus}}</td>
+                <td class="column2">{{item.selectedBlock}}</td>
+                <td class="column2">{{item.floor}}</td>
                 <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
                 <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
