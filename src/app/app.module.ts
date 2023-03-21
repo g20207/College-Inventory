@@ -24,6 +24,7 @@ import {DataService} from './services/data.service';
 import {ApiService} from './services/api.service';
 import {firebase} from '../environments/firebase';
 import { FormsModule } from '@angular/forms';
+import { RoomsComponent } from './components/rooms/rooms.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     TopbarComponent,
     AddComponent,
     CampusComponent,
-    FloorComponent
+    FloorComponent,
+    RoomsComponent,
   ],
   imports: [
     BrowserModule,

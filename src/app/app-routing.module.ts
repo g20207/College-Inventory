@@ -9,6 +9,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { AddComponent } from './components/add/add.component';
 import { CampusComponent } from './components/campus/campus.component';
 import { FloorComponent } from './components/floor/floor.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
@@ -19,7 +20,9 @@ const routes: Routes = [
   {path:'products',component:ProductsComponent},
   {path:'add',component:AddComponent},
   {path:'campus',component:CampusComponent},
-  {path:'floor',component:FloorComponent}
+  {path:'floor',component:FloorComponent},
+  {path:'rooms',component:RoomsComponent}
+
 ];
 
 @NgModule({

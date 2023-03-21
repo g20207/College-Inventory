@@ -1,7 +1,7 @@
 
 <!-- breadcrumb -->
 <div class="breadcrumb">
-  <div class="breadcrumb-heading">FLOOR DETAILS</div>
+  <div class="breadcrumb-heading">ROOM DETAILS</div>
   <!-- <div class="breadcrumb-path">path1 &nbsp; &gt; &nbsp; path2</div> -->
 </div>
 <!-- breadcrumb ends -->
@@ -11,39 +11,45 @@
   <div class="row">
     <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:355px;">
       <!-- getting campus as input -->
-      <form class="panel panel-default" [formGroup]="floorForm">
+      <form class="panel panel-default" [formGroup]="roomForm">
         <div class="panel-body bg-gray">
-          <p><strong>ADD FLOOR</strong></p>
+          <p><strong>ADD ROOM</strong></p>
           <label>Select Campus:</label>
           <div class="form-group">
-  <select formControlName="selectedCampus" class="form-control caret"  [(ngModel)]="selectedCampusValue" >
+  <select formControlName="selectedCampus" class="form-control caret"  [(ngModel)]="selectedCampusValue">
     <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
   </select>
           </div>
           <label>Select Block:</label>
           <div class="form-group">
-  <select formControlName="selectedBlock" class="form-control caret">
+  <select formControlName="selectedBlock" class="form-control caret" [(ngModel)]="selectedBlockValue">
       <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
   </select>
           </div>
-         <label style="padding-top:10px;">Enter Floor:</label>
+          <label>Select Floor:</label>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter floor name" formControlName="floor">
+  <select formControlName="selectedFloor" class="form-control caret">
+      <option *ngFor="let item of getFilteredFloorList()" [value]="item.floor">{{item.floor}}</option>
+  </select>
+          </div>
+         <label style="padding-top:10px;">Enter Room:</label>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter floor name" formControlName="room">
             <div style="color:red;font-size: small;"
-              *ngIf="floorForm.controls['floor'].invalid && (floorForm.controls['floor'].dirty || floorForm.controls['floor'].touched)">
-              <div *ngIf="floorForm.controls['floor'].errors.required">
-                floor name is required.
+              *ngIf="roomForm.controls['room'].invalid && (roomForm.controls['room'].dirty || roomForm.controls['room'].touched)">
+              <div *ngIf="roomForm.controls['room'].errors.required">
+                room name is required.
               </div>
-              <div *ngIf="floorForm.controls['floor'].errors.minlength">
-                Floor name must be at least 2 characters long.
+              <div *ngIf="roomForm.controls['room'].errors.minlength">
+                room name must be at least 2 characters long.
               </div>
             </div>
           </div>
 
           <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:190px;"
-            [disabled]="!floorForm.valid" (click)="onSubmit()">Add</button>
+            [disabled]="!roomForm.valid" (click)="onSubmit()">Add</button>
             <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:180px;"
-            [disabled]="!floorForm.valid" (click)="onUpdate()" >Update</button>
+            [disabled]="!roomForm.valid" (click)="onUpdate()" >Update</button>
         </div>
       </form>
     </div>
@@ -51,7 +57,7 @@
     <div class="col-xs-12 col-sm-9 col-md-9 ">
       <!-- table heading with search bar -->
       <div class="table-header">
-        <p style="height:10px;"><strong>FLOOR LIST</strong></p>
+        <p style="height:10px;"><strong>BLOCK LIST</strong></p>
         <div class="table-controls">
           <div class="search">
             <div>
@@ -73,16 +79,18 @@
                 <th class="column2 row-heading-th-tag">Campus</th>
                 <th class="column2 row-heading-th-tag">Block</th>
                 <th class="column2 row-heading-th-tag">Floor</th>
+                <th class="column2 row-heading-th-tag">Room</th>
                 <th class="column3 row-heading-th-tag">Edit</th>
                 <th class="column4 row-heading-th-tag">Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of floorList; let i = index;">
-                <td class="column1">{{ i + 1 }}</td>
-                <td class="column2">{{item.selectedCampus}}</td>
-                <td class="column2">{{item.selectedBlock}}</td>
-                <td class="column2">{{item.floor}}</td>
+              <tr *ngFor="let item of roomList; let i = index;">
+                <td>{{ i + 1 }}</td>
+                <td>{{item.selectedCampus}}</td>
+                <td>{{item.selectedBlock}}</td>
+                <td>{{item.selectedFloor}}</td>
+                <td>{{item.room}}</td>
                 <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
                 <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>

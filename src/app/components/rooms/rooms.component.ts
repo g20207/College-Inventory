@@ -11,13 +11,13 @@ import { Observable } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
 
 @Component({
-  selector: 'app-floor',
-  templateUrl: './floor.component.html',
-  styleUrls: ['./floor.component.css']
+  selector: 'app-rooms',
+  templateUrl: './rooms.component.html',
+  styleUrls: ['./rooms.component.css']
 })
-export class FloorComponent implements OnInit {
+export class RoomsComponent implements OnInit {
 
-  floorForm: FormGroup;
+  roomForm: FormGroup;
   Afs: any;
 constructor(
   private formBuilder: FormBuilder,
@@ -25,10 +25,11 @@ constructor(
   private route: ActivatedRoute,
   private makeapi: ApiService
 ) {
-  this.floorForm = new FormGroup({
-  selectedBlock: new FormControl("", [Validators.required,Validators.minLength(2)]),
-  selectedCampus: new FormControl("", [Validators.required,Validators.minLength(2)]),
-  floor: new FormControl("",[Validators.required,Validators.minLength(2)])
+  this.roomForm = new FormGroup({
+  selectedBlock: new FormControl(),
+  selectedCampus: new FormControl(),
+  selectedFloor: new FormControl(),
+  room: new FormControl("",[Validators.required,Validators.minLength(2)])
   });
 }
 isEditMode:boolean = false;
@@ -37,26 +38,27 @@ ngOnInit() {
   this.camplist();
   this.blocklist();
   this.floorlist();
+  this.roomlist();
 }
 onSubmit() {
   this.isEditMode = false;
 
-    var get = this.floorForm.value;
+    var get = this.roomForm.value;
     this.makeapi
-      .addItem("floor", get)
+      .addItem("rooms", get)
       .then((data) => {})
       .catch((Response) => {
-        this.floorlist();
+        this.roomlist();
       });
   // }
-  this.floorForm.reset();
+  this.roomForm.reset();
 }
 
 onUpdate(){
-  var get = this.floorForm.value;
-  this.makeapi.updateItem("floor",get);
+  var get = this.roomForm.value;
+  this.makeapi.updateItem("rooms",get);
   this.isEditMode = false;
-  this.floorForm.reset();
+  this.roomForm.reset();
   // this.camplist();
 }
 
@@ -96,23 +98,40 @@ floorlist(){
     // console.log(this.floorList);
   });
 }
+roomList:any=[];
+roomlist(){
+  this.makeapi.listItem("rooms")
+  .subscribe((res) => {
+    this.roomList = res.map((e: any) => {
+      const data = e.payload.doc.data();
+      data.id = e.payload.doc.id;
+      return data;
+    })
+    // console.log(this.roomList);
+  });
+}
 getValue: any;
 edit(i){
   this.isEditMode = true;
 
-  this.makeapi.getItem("floor", i).subscribe((res) => {
+  this.makeapi.getItem("rooms", i).subscribe((res) => {
     this.getValue = res;
-    this.floorForm.patchValue(res);
+    this.roomForm.patchValue(res);
   }, (err) => {
     console.log('error occured!');
   });
 }
 
 remove(i){
-  this.makeapi.deleteItem("floor", i);
+  this.makeapi.deleteItem("rooms", i);
 }
 selectedCampusValue: string;
 getFilteredBlockList(): any[] {
   return this.blockList.filter(block => block.selectedOption === this.selectedCampusValue);
 }
+selectedBlockValue: string;
+getFilteredFloorList(): any[] {
+  return this.floorList.filter(floor => floor.selectedBlock === this.selectedBlockValue);
+}
+
 }
