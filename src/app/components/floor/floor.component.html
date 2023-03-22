@@ -20,9 +20,9 @@
     <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
   </select>
           </div>
-          <label>Select Block:</label>
+          <label style="padding-top:10px;">Select Block:</label>
           <div class="form-group">
-  <select formControlName="selectedBlock" class="form-control caret">
+  <select formControlName="selectedBlock" class="form-control caret" >
       <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
   </select>
           </div>
@@ -40,9 +40,9 @@
             </div>
           </div>
 
-          <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:190px;"
+          <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:20px;margin-left:190px;"
             [disabled]="!floorForm.valid" (click)="onSubmit()">Add</button>
-            <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:35px;margin-left:180px;"
+            <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:20px;margin-left:180px;"
             [disabled]="!floorForm.valid" (click)="onUpdate()" >Update</button>
         </div>
       </form>

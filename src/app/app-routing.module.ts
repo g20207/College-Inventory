@@ -10,6 +10,8 @@ import { AddComponent } from './components/add/add.component';
 import { CampusComponent } from './components/campus/campus.component';
 import { FloorComponent } from './components/floor/floor.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { ItemsComponent } from './components/items/items.component';
+import { AddItemsComponent } from './components/add-items/add-items.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
@@ -21,8 +23,9 @@ const routes: Routes = [
   {path:'add',component:AddComponent},
   {path:'campus',component:CampusComponent},
   {path:'floor',component:FloorComponent},
-  {path:'rooms',component:RoomsComponent}
-
+  {path:'rooms',component:RoomsComponent},
+  {path:'items',component:ItemsComponent},
+  {path:'add-items',component:AddItemsComponent}
 ];
 
 @NgModule({

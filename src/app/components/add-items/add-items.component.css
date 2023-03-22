@@ -1,0 +1,23 @@
+/* breadcrumb */
+.breadcrumb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #666;
+  margin-left: 70px;
+
+}
+
+.breadcrumb-heading {
+  font-weight: bold;
+}
+
+.breadcrumb-path {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
