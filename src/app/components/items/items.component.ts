@@ -38,6 +38,7 @@ ngOnInit() {
   this.blocklist();
   this.floorlist();
   this.roomlist();
+  this.itemslist();
 }
 onSubmit() {
   this.isEditMode = false;
@@ -49,7 +50,6 @@ onSubmit() {
       .catch((Response) => {
         this.roomlist();
       });
-  // }
   this.roomForm.reset();
 }
 
@@ -109,6 +109,18 @@ roomlist(){
     // console.log(this.roomList);
   });
 }
+itemsList:any=[];
+itemslist(){
+  this.makeapi.listItem("items")
+  .subscribe((res) => {
+    this.itemsList = res.map((e: any) => {
+      const data = e.payload.doc.data();
+      data.id = e.payload.doc.id;
+      return data;
+    })
+    // console.log(this.itemsList);
+  });
+}
 getValue: any;
 edit(i){
   this.isEditMode = true;
@@ -136,5 +148,8 @@ selectedFloorValue: string;
 getFilteredRoomList(): any[] {
   return this.roomList.filter(rooms => rooms.selectedFloor === this.selectedFloorValue);
 }
-
+selectedRoomValue: string;
+filteredRoomDetails(): any[] {
+  return this.itemsList.filter(items => items.selectedRoom === this.selectedRoomValue);
+}
 }

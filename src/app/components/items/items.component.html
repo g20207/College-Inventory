@@ -32,7 +32,7 @@
   </select>
   <label style="padding-top:10px;">Select Room:</label>
   <div class="form-group">
-<select formControlName="selectedRoom" class="form-control caret">
+<select formControlName="selectedRoom" class="form-control caret" [(ngModel)]="selectedRoomValue">
 <option *ngFor="let item of getFilteredRoomList()" [value]="item.room">{{item.room}}</option>
 </select>
           </div>
@@ -58,7 +58,6 @@
             </div>
           </div>
                     <button routerLink="/add-items" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button>
-
         </div>
       </div>
       <!-- table heading with search bar ends-->
@@ -70,23 +69,21 @@
             <thead class="row-heading">
               <tr class="table100-head">
                 <th class="column1 row-heading-th-tag ">S.No</th>
-                <th class="column2 row-heading-th-tag">Campus</th>
-                <th class="column2 row-heading-th-tag">Block</th>
-                <th class="column2 row-heading-th-tag">Floor</th>
-                <th class="column2 row-heading-th-tag">Room</th>
-                <th class="column3 row-heading-th-tag">Edit</th>
-                <th class="column4 row-heading-th-tag">Delete</th>
+                <th class="column2 row-heading-th-tag">Item</th>
+                <th class="column2 row-heading-th-tag">No. of Items</th>
+                <th class="column2 row-heading-th-tag">Price</th>
+                <th class="column2 row-heading-th-tag">Description</th>
+                <th class="column3 row-heading-th-tag">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of roomList; let i = index;">
+              <tr *ngFor="let item of filteredRoomDetails(); let i = index;">
                 <td>{{ i + 1 }}</td>
-                <td>{{item.selectedCampus}}</td>
-                <td>{{item.selectedBlock}}</td>
-                <td>{{item.selectedFloor}}</td>
-                <td>{{item.room}}</td>
-                <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
-                <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                <td>{{item.ItemName}}</td>
+                <td>{{item.itemno}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+                <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
               </tr>
             </tbody>
