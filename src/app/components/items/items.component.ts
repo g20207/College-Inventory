@@ -41,7 +41,6 @@ ngOnInit() {
   this.itemslist();
 }
 onSubmit() {
-  this.isEditMode = false;
 
     var get = this.roomForm.value;
     this.makeapi
@@ -53,13 +52,7 @@ onSubmit() {
   this.roomForm.reset();
 }
 
-onUpdate(){
-  var get = this.roomForm.value;
-  this.makeapi.updateItem("rooms",get);
-  this.isEditMode = false;
-  this.roomForm.reset();
-  // this.camplist();
-}
+
 
 campList:any=[];
 camplist() {
@@ -122,19 +115,23 @@ itemslist(){
   });
 }
 getValue: any;
-edit(i){
-  this.isEditMode = true;
-
-  this.makeapi.getItem("rooms", i).subscribe((res) => {
-    this.getValue = res;
-    this.roomForm.patchValue(res);
-  }, (err) => {
-    console.log('error occured!');
-  });
+edit(itemId: string) {
+  this.router.navigate(['add-items'], { queryParams: { id: itemId, isEditing: true } });
 }
 
+// edit(i){
+//   this.isEditMode = true;
+
+//   this.makeapi.getItem("rooms", i).subscribe((res) => {
+//     this.getValue = res;
+//     this.roomForm.patchValue(res);
+//   }, (err) => {
+//     console.log('error occured!');
+//   });
+// }
+
 remove(i){
-  this.makeapi.deleteItem("rooms", i);
+  this.makeapi.deleteItem("items", i);
 }
 selectedCampusValue: string;
 getFilteredBlockList(): any[] {

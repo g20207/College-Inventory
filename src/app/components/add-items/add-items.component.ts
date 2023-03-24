@@ -19,10 +19,12 @@ export class AddItemsComponent implements OnInit {
   AddForm: FormGroup;
   Afs: any;
   isEditMode:boolean = false;
-
+  getValue: any;
+  isEditing = false;
   constructor(private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,
     private makeapi: ApiService) { }
+    paramsObject: any = {};
 
   ngOnInit() {
     this.AddForm = this.fb.group({
@@ -36,6 +38,31 @@ export class AddItemsComponent implements OnInit {
       // warranty: [false, Validators.requiredTrue],
       // warrantyClaim: [false,Validators.requiredTrue],
       description: ['',[Validators.required, Validators.minLength(2)]]
+    });
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.paramsObject = params.id;
+        if(params.isEditing === 'true'){
+          this.isEditing = params.isEditing;
+        }
+        // this.isEditing = params.isEditing === 'true';
+         // Convert the string value to a boolean
+        // Fetch the item details using params.id and populate the form fields
+      }
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params.id && params.isEditing) {
+        this.isEditing = true;
+        this.paramsObject = params.id;
+        this.makeapi.getItem("items", this.paramsObject).subscribe((res) => {
+          this.getValue = res;
+          console.log(this.getValue);
+          this.AddForm.patchValue(res);
+        }, (err) => {
+          console.log('error occurred!');
+        });
+      }
     });
     this.camplist();
     this.blocklist();
@@ -55,17 +82,17 @@ export class AddItemsComponent implements OnInit {
         .addItem("items", get)
         .then((data) => {})
         .catch((Response) => {
-          // this.itemslist();
         });
+
     this.AddForm.reset();
     }
   }
+
   onUpdate(){
     var get = this.AddForm.value;
-    this.makeapi.updateItem("rooms",get);
-    this.isEditMode = false;
+    this.makeapi.updateItem("items",get);
+    this.isEditing = false;
     this.AddForm.reset();
-    // this.camplist();
   }
 
   campList:any=[];
@@ -128,21 +155,7 @@ itemslist(){
     // console.log(this.itemsList);
   });
 }
-getValue: any;
-// edit(i){
-//   this.isEditMode = true;
 
-//   this.makeapi.getItem("rooms", i).subscribe((res) => {
-//     this.getValue = res;
-//     this.AddForm.patchValue(res);
-//   }, (err) => {
-//     console.log('error occured!');
-//   });
-// }
-
-// remove(i){
-//   this.makeapi.deleteItem("rooms", i);
-// }
 selectedCampusValue: string;
 getFilteredBlockList(): any[] {
   return this.blockList.filter(block => block.selectedOption === this.selectedCampusValue);
