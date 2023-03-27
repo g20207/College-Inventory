@@ -119,17 +119,6 @@ edit(itemId: string) {
   this.router.navigate(['add-items'], { queryParams: { id: itemId, isEditing: true } });
 }
 
-// edit(i){
-//   this.isEditMode = true;
-
-//   this.makeapi.getItem("rooms", i).subscribe((res) => {
-//     this.getValue = res;
-//     this.roomForm.patchValue(res);
-//   }, (err) => {
-//     console.log('error occured!');
-//   });
-// }
-
 remove(i){
   this.makeapi.deleteItem("items", i);
 }
