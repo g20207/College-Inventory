@@ -52,11 +52,7 @@ export class BlockComponent implements OnInit {
     var get = this.blockForm.value;
     this.makeapi.updateItem("block",get).then(() => {
       this.isEditMode = false;
-      // try {
         this.blockForm.reset();
-      // } catch (error) {
-      //   console.error(error);
-      // }
     });
   }
 

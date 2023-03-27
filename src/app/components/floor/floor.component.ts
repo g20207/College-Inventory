@@ -26,8 +26,8 @@ constructor(
   private makeapi: ApiService
 ) {
   this.floorForm = new FormGroup({
-  selectedBlock: new FormControl("", [Validators.required,Validators.minLength(2)]),
-  selectedCampus: new FormControl("", [Validators.required,Validators.minLength(2)]),
+  selectedBlock: new FormControl(),
+  selectedCampus: new FormControl(),
   floor: new FormControl("",[Validators.required,Validators.minLength(2)])
   });
 }
@@ -48,16 +48,15 @@ onSubmit() {
       .catch((Response) => {
         this.floorlist();
       });
-  // }
   this.floorForm.reset();
 }
 
 onUpdate(){
   var get = this.floorForm.value;
-  this.makeapi.updateItem("floor",get);
-  this.isEditMode = false;
-  this.floorForm.reset();
-  // this.camplist();
+  this.makeapi.updateItem("floor",get).then(() => {
+    this.isEditMode = false;
+      this.floorForm.reset();
+  });
 }
 
 campList:any=[];
@@ -69,7 +68,6 @@ camplist() {
       data.id = e.payload.doc.id;
       return data;
     })
-    // console.log(this.campList);
   });
 }
 blockList:any=[];

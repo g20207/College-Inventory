@@ -56,10 +56,10 @@ onSubmit() {
 
 onUpdate(){
   var get = this.roomForm.value;
-  this.makeapi.updateItem("rooms",get);
-  this.isEditMode = false;
-  this.roomForm.reset();
-  // this.camplist();
+  this.makeapi.updateItem("rooms",get).then(() => {
+    this.isEditMode = false;
+      this.roomForm.reset();
+  });
 }
 
 campList:any=[];
