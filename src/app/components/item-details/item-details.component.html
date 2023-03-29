@@ -45,12 +45,13 @@
       <div class="table-header">
         <p style="height:10px;"><strong>ITEM LIST</strong></p>
         <div class="table-controls">
-          <!-- <div class="search">
+          <div class="search">
             <div>
-              <input type="text" placeholder="Search">
-              <button type="submit" class="lens"><i class="fas fa-search"></i></button>
+              <input type="text" placeholder="Search" #searchButton (input)="onInput()">
+                            <button type="submit" class="lens" (click)="onSearch()" ><i class="fas fa-search"></i></button>
+
             </div>
-          </div> -->
+          </div>
                     <button routerLink="/add-items" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button>
         </div>
       </div>
@@ -64,88 +65,89 @@
             <thead class="row-heading">
               <tr class="table100-head">
                 <th>S.No</th>
-                <th>Campus</th>
-                <th>Block</th>
-                <th>Floor</th>
-                <th>Room</th>
                 <th>Item</th>
-                <th>No. of Items</th>
+                <th>Item Count</th>
+                <th>Amount</th>
+                <th>Description</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="selectedCampusValue && !selectedBlockValue &&!selectedFloorValue && !selectedRoomValue">
+              <ng-container *ngIf="selectedCampusValue && !selectedBlockValue &&!selectedFloorValue && !selectedRoomValue && !isButtonClicked">
                 <tr
                 *ngFor="let item of filteredCampusDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-                  <td>{{item.selectedCampus}}</td>
-                  <td>{{item.selectedBlock}}</td>
-                  <td>{{item.selectedFloor}}</td>
-                  <td>{{item.selectedRoom}}</td>
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.description}}</td>
                   <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                   </td>
                 </tr>
               </ng-container>
 
-              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&!selectedFloorValue && !selectedRoomValue">
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&!selectedFloorValue && !selectedRoomValue && !isButtonClicked">
                 <tr
                 *ngFor="let item of filteredBlockDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-                  <td>{{item.selectedCampus}}</td>
-                  <td>{{item.selectedBlock}}</td>
-                  <td>{{item.selectedFloor}}</td>
-                  <td>{{item.selectedRoom}}</td>
+
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.description}}</td>
                   <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                   </td>
                 </tr>
               </ng-container>
 
-              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && !selectedRoomValue">
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && !selectedRoomValue && !isButtonClicked">
                 <tr
                 *ngFor="let item of filteredFloorDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-                  <td>{{item.selectedCampus}}</td>
-                  <td>{{item.selectedBlock}}</td>
-                  <td>{{item.selectedFloor}}</td>
-                  <td>{{item.selectedRoom}}</td>
+
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.description}}</td>
                   <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                   </td>
                 </tr>
               </ng-container>
-              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && selectedRoomValue">
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && selectedRoomValue && !isButtonClicked">
                 <tr
                 *ngFor="let item of filteredRoomDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-                  <td>{{item.selectedCampus}}</td>
-                  <td>{{item.selectedBlock}}</td>
-                  <td>{{item.selectedFloor}}</td>
-                  <td>{{item.selectedRoom}}</td>
+
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.description}}</td>
                   <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                   </td>
                 </tr>
               </ng-container>
-<ng-container *ngIf="!selectedCampusValue && !selectedBlockValue && !selectedFloorValue && !selectedRoomValue">
+<ng-container *ngIf="!selectedCampusValue && !selectedBlockValue && !selectedFloorValue && !selectedRoomValue && !isButtonClicked">
   <tr *ngFor="let item of itemsList; let i = index;">
   <td>{{ i + 1 }}</td>
-  <td>{{item.selectedCampus}}</td>
-  <td>{{item.selectedBlock}}</td>
-  <td>{{item.selectedFloor}}</td>
-  <td>{{item.selectedRoom}}</td>
   <td>{{item.ItemName}}</td>
   <td>{{item.itemno}}</td>
+  <td>{{item.amount}}</td>
+  <td>{{item.description}}</td>
   <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
   </td>
 </tr>
 </ng-container>
-
+<ng-container *ngIf="isButtonClicked">
+  <tr *ngFor="let item of getSearchItem(); let i = index;">
+  <td>{{ i + 1 }}</td>
+  <td>{{item.ItemName}}</td>
+  <td>{{item.itemno}}</td>
+  <td>{{item.amount}}</td>
+  <td>{{item.description}}</td>
+  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+  </td>
+</tr>
+</ng-container>
             </tbody>
           </table>
         </div>
