@@ -9,12 +9,13 @@ import {
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
+declare var $:any
 @Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css']
+  selector: 'app-item-details',
+  templateUrl: './item-details.component.html',
+  styleUrls: ['./item-details.component.css']
 })
-export class ItemsComponent implements OnInit {
+export class ItemDetailsComponent implements OnInit {
 
   roomForm: FormGroup;
   Afs: any;
@@ -34,6 +35,9 @@ constructor(
 isEditMode:boolean = false;
 
 ngOnInit() {
+  $(document).ready(function () {
+    $('#myTable').DataTable();
+  });
   this.camplist();
   this.blocklist();
   this.floorlist();
@@ -132,5 +136,15 @@ getFilteredRoomList(): any[] {
 selectedRoomValue: string;
 filteredRoomDetails(): any[] {
   return this.itemsList.filter(items => items.selectedRoom === this.selectedRoomValue);
+}
+
+filteredFloorDetails(): any[] {
+  return this.itemsList.filter(rooms => rooms.selectedFloor === this.selectedFloorValue);
+}
+filteredBlockDetails(): any[] {
+  return this.itemsList.filter(floor => floor.selectedBlock === this.selectedBlockValue);
+}
+filteredCampusDetails(): any[] {
+  return this.itemsList.filter(block => block.selectedCampus === this.selectedCampusValue);
 }
 }

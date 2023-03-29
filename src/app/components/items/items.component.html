@@ -9,9 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:380px;">
-      <!-- getting campus as input -->
       <form class="panel panel-default" [formGroup]="roomForm">
-        <!-- <div class="panel-body bg-gray"> -->
           <p><strong>SELECT ROOM</strong></p>
           <label>Select Campus:</label>
           <div class="form-group">
@@ -36,12 +34,6 @@
 <option *ngFor="let item of getFilteredRoomList()" [value]="item.room">{{item.room}}</option>
 </select>
           </div>
-
-
-          <!-- <button *ngIf="!isEditMode" type="button" class="btn btn-success" style="margin-top:23px;margin-left:190px;"
-            [disabled]="!roomForm.valid" (click)="onSubmit()">Add</button>
-            <button *ngIf="isEditMode" type="button" class="btn btn-success" style="margin-top:23px;margin-left:180px;"
-            [disabled]="!roomForm.valid" (click)="onUpdate()" >Update</button> -->
         </div>
       </form>
     </div>

@@ -16,9 +16,11 @@
           <p><strong>ADD FLOOR</strong></p>
           <label>Select Campus:</label>
           <div class="form-group">
-  <select formControlName="selectedCampus" class="form-control caret"  [(ngModel)]="selectedCampusValue" >
-    <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
-  </select>
+            <select formControlName="selectedCampus" class="form-control" [(ngModel)]="selectedCampusValue">
+              <option value="" selected disabled >Select a campus</option>
+              <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
+            </select>
+
           </div>
           <label style="padding-top:10px;">Select Block:</label>
           <div class="form-group">

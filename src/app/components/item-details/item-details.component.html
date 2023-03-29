@@ -1,0 +1,159 @@
+
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <div class="breadcrumb-heading">ITEM DETAILS</div>
+</div>
+<!-- breadcrumb ends -->
+
+<!-- input and display table grid -->
+<div class="container">
+  <div class="row">
+    <form [formGroup]="roomForm" style="background-color:#f2f2f2;margin-bottom:10px;padding:10px;padding-right: 20px;">
+      <p><strong>SEARCH BY FILTERS</strong></p>
+      <div class="d-flex justify-content-between">
+        <div class="col-md-3 mb-3">
+          <label for="selectedCampus">Select Campus:</label>
+          <select formControlName="selectedCampus" class="form-control" id="selectedCampus" [(ngModel)]="selectedCampusValue">
+            <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
+          </select>
+        </div>&nbsp;
+        <div class="col-md-3 mb-3">
+          <label for="selectedBlock">Select Block:</label>
+          <select formControlName="selectedBlock" class="form-control" id="selectedBlock" [(ngModel)]="selectedBlockValue">
+            <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
+          </select>
+        </div>&nbsp;
+        <div class="col-md-3 mb-3">
+          <label for="selectedFloor">Select Floor:</label>
+          <select formControlName="selectedFloor" class="form-control dropdown " id="selectedFloor" [(ngModel)]="selectedFloorValue">
+            <option *ngFor="let item of getFilteredFloorList()" [value]="item.floor">{{item.floor}}</option>
+          </select>
+        </div>&nbsp;
+        <div class="col-md-3 mb-3">
+          <label for="selectedRoom">Select Room:</label>
+          <select formControlName="selectedRoom" class="form-control" id="selectedRoom" [(ngModel)]="selectedRoomValue">
+            <option *ngFor="let item of getFilteredRoomList()" [value]="item.room">{{item.room}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <!-- table heading and table -->
+    <div class="col-12">
+
+      <!-- table heading with search bar -->
+      <div class="table-header">
+        <p style="height:10px;"><strong>ITEM LIST</strong></p>
+        <div class="table-controls">
+          <!-- <div class="search">
+            <div>
+              <input type="text" placeholder="Search">
+              <button type="submit" class="lens"><i class="fas fa-search"></i></button>
+            </div>
+          </div> -->
+                    <button routerLink="/add-items" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button>
+        </div>
+      </div>
+      <!-- table heading with search bar ends-->
+
+      <div>
+        <!-- below class is for responsiveness -->
+        <div class="table-responsive">
+          <!-- id="myTable" -->
+          <table class="table " >
+            <thead class="row-heading">
+              <tr class="table100-head">
+                <th>S.No</th>
+                <th>Campus</th>
+                <th>Block</th>
+                <th>Floor</th>
+                <th>Room</th>
+                <th>Item</th>
+                <th>No. of Items</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="selectedCampusValue && !selectedBlockValue &&!selectedFloorValue && !selectedRoomValue">
+                <tr
+                *ngFor="let item of filteredCampusDetails(); let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
+                  <td>{{item.ItemName}}</td>
+                  <td>{{item.itemno}}</td>
+                  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&!selectedFloorValue && !selectedRoomValue">
+                <tr
+                *ngFor="let item of filteredBlockDetails(); let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
+                  <td>{{item.ItemName}}</td>
+                  <td>{{item.itemno}}</td>
+                  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && !selectedRoomValue">
+                <tr
+                *ngFor="let item of filteredFloorDetails(); let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
+                  <td>{{item.ItemName}}</td>
+                  <td>{{item.itemno}}</td>
+                  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="selectedCampusValue && selectedBlockValue &&selectedFloorValue && selectedRoomValue">
+                <tr
+                *ngFor="let item of filteredRoomDetails(); let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
+                  <td>{{item.ItemName}}</td>
+                  <td>{{item.itemno}}</td>
+                  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+<ng-container *ngIf="!selectedCampusValue && !selectedBlockValue && !selectedFloorValue && !selectedRoomValue">
+  <tr *ngFor="let item of itemsList; let i = index;">
+  <td>{{ i + 1 }}</td>
+  <td>{{item.selectedCampus}}</td>
+  <td>{{item.selectedBlock}}</td>
+  <td>{{item.selectedFloor}}</td>
+  <td>{{item.selectedRoom}}</td>
+  <td>{{item.ItemName}}</td>
+  <td>{{item.itemno}}</td>
+  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+  </td>
+</tr>
+</ng-container>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- table heading and table ends -->
+
+
+  </div>
+</div>
+<!-- input and display table grid ends -->

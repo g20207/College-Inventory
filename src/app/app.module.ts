@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { ItemsComponent } from './components/items/items.component';
 import { AddItemsComponent } from './components/add-items/add-items.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { AddItemsComponent } from './components/add-items/add-items.component';
     RoomsComponent,
     ItemsComponent,
     AddItemsComponent,
+    ItemDetailsComponent,
   ],
   imports: [
     BrowserModule,

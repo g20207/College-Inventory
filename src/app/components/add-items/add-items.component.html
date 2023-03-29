@@ -89,7 +89,6 @@
     </div>
     <div class="row mt-3">
       <div class="col-md-12 text-end">
-        <!-- <button type="button" class="btn btn-danger me-3">Cancel</button> -->
         <button  *ngIf="!isEditing" type="submit" class="btn btn-success" (click)="SubmitBtn()" [disabled]="!AddForm.valid">Add</button>
         <button  *ngIf="isEditing" type="submit" class="btn btn-success" (click)="onUpdate()" [disabled]="!AddForm.valid">Update</button>
       </div>
