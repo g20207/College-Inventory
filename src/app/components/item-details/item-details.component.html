@@ -65,6 +65,14 @@
             <thead class="row-heading">
               <tr class="table100-head">
                 <th>S.No</th>
+                <th>Campus</th>
+
+                <th>Block</th>
+
+                <th>Floor</th>
+
+                <th>Room</th>
+
                 <th>Item</th>
                 <th>Item Count</th>
                 <th>Amount</th>
@@ -77,6 +85,11 @@
                 <tr
                 *ngFor="let item of filteredCampusDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
+
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
                   <td>{{item.amount}}</td>
@@ -90,7 +103,10 @@
                 <tr
                 *ngFor="let item of filteredBlockDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
                   <td>{{item.amount}}</td>
@@ -104,7 +120,10 @@
                 <tr
                 *ngFor="let item of filteredFloorDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
                   <td>{{item.amount}}</td>
@@ -117,7 +136,10 @@
                 <tr
                 *ngFor="let item of filteredRoomDetails(); let i = index;">
                   <td>{{ i + 1 }}</td>
-
+                  <td>{{item.selectedCampus}}</td>
+                  <td>{{item.selectedBlock}}</td>
+                  <td>{{item.selectedFloor}}</td>
+                  <td>{{item.selectedRoom}}</td>
                   <td>{{item.ItemName}}</td>
                   <td>{{item.itemno}}</td>
                   <td>{{item.amount}}</td>
@@ -129,6 +151,10 @@
 <ng-container *ngIf="!selectedCampusValue && !selectedBlockValue && !selectedFloorValue && !selectedRoomValue && !isButtonClicked">
   <tr *ngFor="let item of itemsList; let i = index;">
   <td>{{ i + 1 }}</td>
+  <td>{{item.selectedCampus}}</td>
+  <td>{{item.selectedBlock}}</td>
+  <td>{{item.selectedFloor}}</td>
+  <td>{{item.selectedRoom}}</td>
   <td>{{item.ItemName}}</td>
   <td>{{item.itemno}}</td>
   <td>{{item.amount}}</td>
@@ -140,6 +166,10 @@
 <ng-container *ngIf="isButtonClicked">
   <tr *ngFor="let item of getSearchItem(); let i = index;">
   <td>{{ i + 1 }}</td>
+  <td>{{item.selectedCampus}}</td>
+  <td>{{item.selectedBlock}}</td>
+  <td>{{item.selectedFloor}}</td>
+  <td>{{item.selectedRoom}}</td>
   <td>{{item.ItemName}}</td>
   <td>{{item.itemno}}</td>
   <td>{{item.amount}}</td>
