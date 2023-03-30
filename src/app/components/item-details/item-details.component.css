@@ -86,15 +86,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.add-button {
+.lens:hover {
+  background-color: rgb(249, 189, 249);
+}
+.btn-outline-purple {
+  color: #af4c95;
+  background-color: transparent;
+  background-image: none;
+  border-color: #af4c95;
+}
+.btn-outline-purple:hover {
+  color: #fff;
+  background-color: #af4c95;
+  border-color: #af4c95;
+}
+
+/* .add-button {
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
-  background-color: #4CAF50;
+  background-color: #af4c95;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-}
+} */
 /* .table-controls button:hover {
   background-color: #0e120e;
 }
