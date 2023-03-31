@@ -149,16 +149,30 @@ selectedFloorValue: string;
 getFilteredRoomList(): any[] {
   return this.roomList.filter(rooms => rooms.selectedFloor === this.selectedFloorValue);
 }
+
 selectedRoomValue: string;
 filteredRoomDetails(): any[] {
-  return this.itemsList.filter(items => items.selectedRoom === this.selectedRoomValue);
+  return this.itemsList.filter(item =>
+    item.selectedCampus === this.selectedCampusValue &&
+    item.selectedBlock === this.selectedBlockValue &&
+    item.selectedFloor === this.selectedFloorValue &&
+    item.selectedRoom === this.selectedRoomValue
+  );
 }
 
+
 filteredFloorDetails(): any[] {
-  return this.itemsList.filter(rooms => rooms.selectedFloor === this.selectedFloorValue);
+  return this.itemsList.filter(rooms =>
+    rooms.selectedCampus === this.selectedCampusValue &&
+    rooms.selectedBlock === this.selectedBlockValue &&
+     rooms.selectedFloor === this.selectedFloorValue
+     );
 }
 filteredBlockDetails(): any[] {
-  return this.itemsList.filter(floor => floor.selectedBlock === this.selectedBlockValue);
+  return this.itemsList.filter(floor =>
+    floor.selectedCampus === this.selectedCampusValue &&
+    floor.selectedBlock === this.selectedBlockValue
+    );
 }
 filteredCampusDetails(): any[] {
   return this.itemsList.filter(block => block.selectedCampus === this.selectedCampusValue);

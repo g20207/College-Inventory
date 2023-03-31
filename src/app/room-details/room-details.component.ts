@@ -61,14 +61,14 @@ additemslist(){
   });
 // console.log(this.additemsList);
 }
-getSelectedItem() {
-
+selectedItem:string;
+nameChanged(event) {
+  this.selectedItem = event.target.value;
+  console.log(this.selectedItem)
 }
-selectedItemValue: string;
-getFilteredBrandList(){
-  // console.log(this.selectedItemValue);
-  debugger;
-  var mybrand = this.additemsList.filter(additems => additems.ItemName === this.selectedItemValue);
+getFilteredBrandList():any{
+  // debugger;
+  return this.additemsList.filter(additems => additems.ItemName === this.selectedItem);
 // console.log(mybrand);
 }
 

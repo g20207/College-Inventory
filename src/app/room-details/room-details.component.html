@@ -70,11 +70,11 @@
                 <tr>
                   <td>1</td>
                   <td>
-                      <select class="form-control" (change)="getSelectedItem()" >
+                      <select class="form-control" (change)="nameChanged($event)" >
                     <option *ngFor="let item of additemsList">{{item.ItemName}}</option>
                   </select>
                 </td>
-                  <td *ngFor="let item of mybrand">
+                  <td *ngFor="let item of getFilteredBrandList()">
                  {{item.Brand}}
                   </td>
                   <td>
