@@ -1,49 +1,76 @@
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <div class="breadcrumb-heading">ITEM DETAILS</div>
+  <div class="breadcrumb-path">Item Details &nbsp; &gt; &nbsp; Add Items</div>
+</div>
+<!-- breadcrumb ends -->
+
+<!-- form for item details -->
 <div class="container bg-light px-5 py-3 form-container">
   <h1 class="h4 mb-3" style="padding-top: 10px;">ADD ITEMS</h1>
-  <form [formGroup]="form">
+
+  <form [formGroup]="AddForm" ngNativeValidate>
     <div class="row">
       <div class="col-md-4 mb-3">
-        <label for="firstName" class="form-label">Item1</label>
-        <input type="text" class="form-control form-control-sm" id="firstName">
+        <label class="form-label">Item Name:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="ItemName">
+        <div *ngIf="AddForm.get('ItemName').invalid && (AddForm.get('ItemName').dirty || AddForm.get('ItemName').touched)" class="alert alert-danger">
+          <div *ngIf="AddForm.get('ItemName').errors.required">Item name is required.</div>
+          <div *ngIf="AddForm.get('ItemName').errors.minlength">Item name must be at least 2 characters long.</div>
+        </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="lastName" class="form-label">Item1</label>
-        <input type="text" class="form-control form-control-sm" id="lastName">
-      </div>g
-      <div class="col-md-4 mb-3">
-        <label for="email" class="form-label">Item1</label>
-        <input type="email" class="form-control form-control-sm" id="email">
+        <label class="form-label">Item ID:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="ItemID">
+        <div *ngIf="AddForm.get('ItemID').invalid && (AddForm.get('ItemID').dirty || AddForm.get('ItemID').touched)" class="alert alert-danger">
+          <div *ngIf="AddForm.get('ItemID').errors.required">Item ID is required.</div>
+        </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="phone" class="form-label">Item1</label>
-        <input type="tel" class="form-control form-control-sm" id="phone">
+        <label class="form-label">Amount:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="amount">
+        <div *ngIf="AddForm.get('amount').invalid && (AddForm.get('amount').dirty || AddForm.get('amount').touched)" class="alert alert-danger">
+          <div *ngIf="AddForm.get('amount').errors.required">Amount is required.</div>
+          <div *ngIf="AddForm.get('amount').errors.minlength">Amount must be at least 2 characters long.</div>
+        </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="address" class="form-label">Item2</label>
-        <input type="text" class="form-control form-control-sm" id="address">
+        <label class="form-label">Brand Name:</label>
+        <input type="text" class="form-control form-control-sm" formControlName="Brand">
+        <div *ngIf="AddForm.get('Brand').invalid && (AddForm.get('Brand').dirty || AddForm.get('Brand').touched)" class="alert alert-danger">
+          <div *ngIf="AddForm.get('Brand').errors.required">Brand is required.</div>
+          <div *ngIf="AddForm.get('Brand').errors.minlength">Brand must be at least 2 characters long.</div>
+        </div>
+      </div>
+          <div class="col-md-4 mb-3">
+        <div class="form-check" style="padding-top:30px;">
+          <label class="form-check-label">Warranty</label>
+          <input type="checkbox" class="form-check-input " formControlName="warranty" required>
+        </div>
       </div>
       <div class="col-md-4 mb-3">
-        <label for="city" class="form-label">Item3</label>
-        <input type="text" class="form-control form-control-sm" id="city">
+        <div class="form-check" style="padding-top:30px;">
+          <label class="form-check-label">Warranty Claim</label>
+          <input type="checkbox" class="form-check-input " formControlName="warrantyClaim" required >
+        </div>
       </div>
+
       <div class="col-md-4 mb-3">
-        <label for="state" class="form-label">Item4</label>
-        <input type="text" class="form-control form-control-sm" id="state">
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="zip" class="form-label">Item5</label>
-        <input type="text" class="form-control form-control-sm" id="zip">
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="country" class="form-label">Item6</label>
-        <input type="text" class="form-control form-control-sm" id="country">
+        <label class="form-label">Item Description:</label>
+        <textarea style="height:100px;" type="text" class="form-control form-control-sm" formControlName="description"></textarea>
+        <div *ngIf="AddForm.get('description').invalid && (AddForm.get('description').dirty || AddForm.get('description').touched)" class="alert alert-danger">
+          <div *ngIf="AddForm.get('description').errors.required">Description is required.</div>
+          <div *ngIf="AddForm.get('description').errors.minlength">Description must be at least 2 characters long.</div>
+        </div>
       </div>
     </div>
     <div class="row mt-3">
       <div class="col-md-12 text-end">
-        <button type="button" class="btn btn-danger me-3">Cancel</button>
-        <button type="submit" class="btn btn-success">Add</button>
+        <button  *ngIf="!isEditing" type="submit" class="btn btn-success" (click)="SubmitBtn()" [disabled]="!AddForm.valid">Add</button>
+        <button  *ngIf="isEditing" type="submit" class="btn btn-success" (click)="onUpdate()" [disabled]="!AddForm.valid">Update</button>
       </div>
     </div>
   </form>
 </div>
+
+<!-- form for item details ends -->

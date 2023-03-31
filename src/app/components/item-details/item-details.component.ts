@@ -80,6 +80,7 @@ camplist() {
       return data;
     })
   });
+  // console.log(this.campList);
 }
 blockList:any=[];
 blocklist(){
@@ -102,6 +103,7 @@ floorlist(){
       return data;
     })
   });
+  // console.log(this.floorList);
 }
 roomList:any=[];
 roomlist(){
@@ -113,6 +115,7 @@ roomlist(){
       return data;
     })
   });
+  // console.log(this.roomList);
 }
 itemsList:any=[];
 itemslist(){
@@ -124,6 +127,7 @@ itemslist(){
       return data;
     })
   });
+  // console.log(this.itemsList);
 }
 getValue: any;
 edit(itemId: string) {

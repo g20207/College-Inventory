@@ -12,7 +12,10 @@
   display: flex;
   align-items: center;
 }
-
+.heading {
+  font-family: 'Alkatra', cursive;
+font-family: 'Jost', sans-serif;
+}
 input{
   border: none;
   background-color: #f2f2f2;

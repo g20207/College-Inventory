@@ -1,5 +1,51 @@
-.form-container {
-  margin-left: 120px; /* adjust this value to match the width of your sidebar */
-  margin-top: 50px;
+/* breadcrumb */
+.breadcrumb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #666;
+  margin-left: 70px;
+
 }
 
+.breadcrumb-heading {
+  font-weight: bold;
+}
+
+.breadcrumb-path {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* breadcumb css ends */
+
+/* checkbox css */
+.form-check-input {
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+}
+.form-check-input[type="checkbox"]:checked {
+  background-color: purple;
+  border-color: purple;
+}
+.form-check-label {
+  margin-left: 5px;
+  padding-top:3px;
+}
+
+@media (max-width: 576px) {
+  .form-check-label {
+    font-size: 14px;
+  }
+}
+
+input:focus,textarea:focus
+{
+  border-color: purple;
+  box-shadow: none;
+}

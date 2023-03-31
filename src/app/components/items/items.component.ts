@@ -100,7 +100,7 @@ roomlist(){
 }
 itemsList:any=[];
 itemslist(){
-  this.makeapi.listItem("items")
+  this.makeapi.listItem("add-items")
   .subscribe((res) => {
     this.itemsList = res.map((e: any) => {
       const data = e.payload.doc.data();
@@ -111,11 +111,11 @@ itemslist(){
 }
 getValue: any;
 edit(itemId: string) {
-  this.router.navigate(['add-items'], { queryParams: { id: itemId, isEditing: true } });
+  this.router.navigate(['add'], { queryParams: { id: itemId, isEditing: true } });
 }
 
 remove(i){
-  this.makeapi.deleteItem("items", i);
+  this.makeapi.deleteItem("add-items", i);
 }
 selectedCampusValue: string;
 getFilteredBlockList(): any[] {

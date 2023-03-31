@@ -28,6 +28,7 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 import { ItemsComponent } from './components/items/items.component';
 import { AddItemsComponent } from './components/add-items/add-items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { RoomDetailsComponent } from './room-details/room-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
     ItemsComponent,
     AddItemsComponent,
     ItemDetailsComponent,
+    RoomDetailsComponent,
   ],
   imports: [
     BrowserModule,
