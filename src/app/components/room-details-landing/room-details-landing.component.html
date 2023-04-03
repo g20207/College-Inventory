@@ -1,0 +1,89 @@
+
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <div class="breadcrumb-heading">ITEM DETAILS</div>
+</div>
+<!-- breadcrumb ends -->
+
+<!-- input and display table grid -->
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-xs-12 col-sm-3 col-md-3" style="background-color: #f2f2f2;padding:20px;height:380px;">
+      <form class="panel panel-default" [formGroup]="roomForm">
+          <p><strong>SELECT ROOM</strong></p>
+          <label>Select Campus:</label>
+          <div class="form-group">
+  <select formControlName="selectedCampus" class="form-control caret"  [(ngModel)]="selectedCampusValue">
+    <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
+  </select>
+          </div>
+          <label style="padding-top:10px;">Select Block:</label>
+          <div class="form-group">
+  <select formControlName="selectedBlock" class="form-control caret" [(ngModel)]="selectedBlockValue">
+      <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
+  </select>
+          </div>
+          <label style="padding-top:10px;">Select Floor:</label>
+          <div class="form-group">
+  <select formControlName="selectedFloor" class="form-control caret" [(ngModel)]="selectedFloorValue">
+      <option *ngFor="let item of getFilteredFloorList()" [value]="item.floor">{{item.floor}}</option>
+  </select>
+  <label style="padding-top:10px;">Select Room:</label>
+  <div class="form-group">
+<select formControlName="selectedRoom" class="form-control caret" [(ngModel)]="selectedRoomValue">
+<option *ngFor="let item of getFilteredRoomList()" [value]="item.room">{{item.room}}</option>
+</select>
+          </div>
+        </div>
+      </form>
+    </div> -->
+    <!-- table heading and table -->
+    <div class="col-12 ">
+      <!-- table heading with search bar -->
+      <div class="table-header">
+        <p style="height:10px;"><strong>ITEM LIST</strong></p>
+        <div class="table-controls">
+          <div class="search">
+            <div>
+              <input type="text" placeholder="Search">
+              <button type="submit" class="lens"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+                    <button routerLink="/room-details" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button>
+        </div>
+      </div>
+      <!-- table heading with search bar ends-->
+
+      <div>
+        <!-- below class is for responsiveness -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="row-heading">
+              <tr class="table100-head">
+                <th>S.No</th>
+                <th>Room Name</th>
+                <th>Room No</th>
+                <th>No. Of Items</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itemsList; let i = index;">
+                <td>{{ i + 1 }}</td>
+                <td>{{item.ItemName}}</td>
+                <td>{{item.ItemID}}</td>
+                <td>{{item.amount}}</td>
+                <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- table heading and table ends -->
+
+
+  </div>
+</div>
+<!-- input and display table grid ends -->

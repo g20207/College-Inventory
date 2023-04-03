@@ -9,7 +9,7 @@ import {
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
-declare var $:any
+declare var $:any;
 @Component({
   selector: 'app-item-details',
   templateUrl: './item-details.component.html',
