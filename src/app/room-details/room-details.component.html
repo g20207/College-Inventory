@@ -8,7 +8,7 @@
 <!-- input and display table grid -->
 <div class="container">
   <div class="row">
-    <form [formGroup]="roomForm" style="background-color:#f2f2f2;margin-bottom:10px;">
+    <form [formGroup]="roomForm" style="background-color:#f2f2f2;margin-bottom:20px;padding-top:8px;">
       <div class="d-flex justify-content-between">
 
         <div class="col-md-3 mb-3">
@@ -26,66 +26,45 @@
       <!-- table heading with search bar -->
       <div class="table-header">
         <p style="height:10px;"><strong>ITEM LIST</strong></p>
-        <div class="table-controls">
-          <div class="search">
-            <div>
-              <input type="text" placeholder="Search by Items" #searchButton (input)="onInput()">
-              <button type="submit" class="lens" (click)="onSearch()" ><i class="fas fa-search"></i></button>
-
-            </div>
-          </div>
-             <button routerLink="/add-items" class="btn btn-outline-purple add-button "><i class="fa fa-plus"></i>&nbsp;Add</button>
-        </div>
       </div>
       <!-- table heading with search bar ends-->
       <div>
         <!-- below class is for responsiveness -->
         <div class="table-responsive">
           <!-- id="myTable" -->
-          <table class="table " >
+          <table class="table">
             <thead class="row-heading">
               <tr class="table100-head">
                 <th>S.No</th>
                 <th>Item name</th>
-                <th>Brand</th>
+                <th >Brand</th>
                 <th>No. Of Items</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-                <!-- <tr
-                *ngFor="let i = index;">
-                  <td>{{ i + 1 }}</td>
-                  <td>
-                      <select [(ngModel)]="selectedItemValue">
-                    <option *ngFor="let item of additemslist()" [value]="item.ItemName">{{item.ItemName}}</option>
+              <tr *ngFor="let item of myArray; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                  <select class="form-control" [(ngModel)]="item.selectedItem" (change)="nameChanged(item)">
+                    <option *ngFor="let item of additemsList" [value]="item.ItemName">{{item.ItemName}}</option>
                   </select>
                 </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
-                  </td>
-                </tr> -->
-                <tr>
-                  <td>1</td>
-                  <td>
-                      <select class="form-control" (change)="nameChanged($event)" >
-                    <option *ngFor="let item of additemsList">{{item.ItemName}}</option>
-                  </select>
+                <td>{{item.brand}}</td>
+                <input type="number" class="form-control" style="width:100px;" [(ngModel)]="item.noOfItems">
+                <td>
+                  &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-plus" (click)="addRow()" style="color:green;"></i>&nbsp;
+                  <i style="color:red;" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
-                  <td *ngFor="let item of getFilteredBrandList()">
-                 {{item.Brand}}
-                  </td>
-                  <td>
-
-                  </td>
-                    <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
-                  </td>
-                </tr>
+              </tr>
             </tbody>
+
           </table>
         </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-success mx-2" (click)="onSubmit()">Add</button>
       </div>
     </div>
     <!-- table heading and table ends -->

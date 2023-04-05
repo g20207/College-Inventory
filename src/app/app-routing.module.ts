@@ -14,6 +14,7 @@ import { ItemsComponent } from './components/items/items.component';
 import { AddItemsComponent } from './components/add-items/add-items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
+import { RoomDetailsLandingComponent } from './components/room-details-landing/room-details-landing.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
@@ -29,7 +30,9 @@ const routes: Routes = [
   {path:'items',component:ItemsComponent},
   {path:'add-items',component:AddItemsComponent},
   {path:'item-details',component:ItemDetailsComponent},
-  {path:'room-details',component:RoomDetailsComponent}
+  {path:'room-details',component:RoomDetailsComponent},
+  {path:'room-details-landing',component:RoomDetailsLandingComponent}
+
 
 
 ];

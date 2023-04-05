@@ -29,6 +29,7 @@ import { ItemsComponent } from './components/items/items.component';
 import { AddItemsComponent } from './components/add-items/add-items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
+import { RoomDetailsLandingComponent } from './components/room-details-landing/room-details-landing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { RoomDetailsComponent } from './room-details/room-details.component';
     AddItemsComponent,
     ItemDetailsComponent,
     RoomDetailsComponent,
+    RoomDetailsLandingComponent,
   ],
   imports: [
     BrowserModule,

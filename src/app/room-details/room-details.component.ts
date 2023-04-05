@@ -24,9 +24,13 @@ constructor(
   private router: Router,
   private route: ActivatedRoute,
   private makeapi: ApiService
-) {
+)
+{
   this.roomForm = new FormGroup({
-  selectedRoom: new FormControl()
+  selectedRoom: new FormControl(),
+  // selectedItem: new FormControl(),
+  // brand: new FormControl(),
+  // noOfItems: new FormControl()
   });
 }
 isEditMode:boolean = false;
@@ -34,8 +38,13 @@ isEditMode:boolean = false;
 ngOnInit() {
   this.roomlist();
   this.additemslist();
-  // this.getFilteredBrandList();
 }
+myArray: any[] = [{
+  id: 1,
+  selectedItem: '',
+  brand: '',
+  numOfItems: 0
+}];
 
 roomList:any=[];
 roomlist(){
@@ -62,25 +71,56 @@ additemslist(){
 // console.log(this.additemsList);
 }
 selectedItem:string;
-nameChanged(event) {
-  this.selectedItem = event.target.value;
-  console.log(this.selectedItem)
-}
-getFilteredBrandList():any{
-  // debugger;
-  return this.additemsList.filter(additems => additems.ItemName === this.selectedItem);
-// console.log(mybrand);
-}
-
-
-getValue: any;
-edit(itemId: string) {
-  this.router.navigate(['add-items'], { queryParams: { id: itemId, isEditing: true } });
+nameChanged(row) {
+  const selectedItem = row.selectedItem;
+  const filteredList = this.additemsList.filter(additems => additems.ItemName === selectedItem);
+  row.brand = filteredList.length > 0 ? filteredList[0].Brand : '';
+//   filteredList.length > 0 checks if the filteredList array has at least one element. If it does, then the selected item has a corresponding brand value in the additemsList array.
+// If filteredList.length > 0 is true, filteredList[0].Brand returns the brand value of the first object in the filteredList array.
+// If filteredList.length > 0 is false, then the selected item does not have a corresponding brand value in the additemsList array, so '' (an empty string) is assigned to the brand property of the row object.
 }
 
-remove(i){
-  this.makeapi.deleteItem("items", i);
+addRow() {
+  const newRow = {
+    id:    1,
+    itemName: '',
+    brand: '',
+    numOfItems: 0
+  };
+  this.myArray.push(newRow);
 }
 
+selectedRoomValue: string;
+onSubmit() {
+    var get = this.roomForm.value;
+    // this.makeapi
+    //   .addItem("room details", get)
+    //   .then((data) => {})
+    //   .catch((Response) => {
+    //   });
+      const itemsData = [];
 
+      for (let i = 0; i < this.myArray.length; i++) {
+        const item = this.myArray[i];
+        itemsData.push({
+          itemName: item.selectedItem,
+          brand: item.brand,
+          numOfItems: item.noOfItems
+        });
+      }
+
+      // console.log(itemsData);
+      const itemsObj = {
+        selectedRoom: this.selectedRoomValue,
+        itemsData: itemsData.reduce((obj, item) => {
+          return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
+        }, {})
+      };
+      this.makeapi
+      .addItem("room details", itemsObj)
+      .then((data) => {})
+      .catch((Response) => {
+      });
+  this.roomForm.reset();
+}
 }

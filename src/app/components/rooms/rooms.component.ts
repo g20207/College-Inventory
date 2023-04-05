@@ -42,7 +42,6 @@ ngOnInit() {
 }
 onSubmit() {
   this.isEditMode = false;
-
     var get = this.roomForm.value;
     this.makeapi
       .addItem("rooms", get)
@@ -50,7 +49,6 @@ onSubmit() {
       .catch((Response) => {
         this.roomlist();
       });
-  // }
   this.roomForm.reset();
 }
 
