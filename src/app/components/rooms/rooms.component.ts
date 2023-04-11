@@ -29,7 +29,8 @@ constructor(
   selectedBlock: new FormControl(),
   selectedCampus: new FormControl(),
   selectedFloor: new FormControl(),
-  room: new FormControl("",[Validators.required,Validators.minLength(2)])
+  room: new FormControl("",[Validators.required,Validators.minLength(2)]),
+  roomno: new FormControl("",Validators.required)
   });
 }
 isEditMode:boolean = false;
@@ -105,7 +106,6 @@ roomlist(){
       data.id = e.payload.doc.id;
       return data;
     })
-    // console.log(this.roomList);
   });
 }
 getValue: any;

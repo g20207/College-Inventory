@@ -109,7 +109,6 @@ itemslist(){
     })
   });
 }
-getValue: any;
 edit(itemId: string) {
   this.router.navigate(['add'], { queryParams: { id: itemId, isEditing: true } });
 }

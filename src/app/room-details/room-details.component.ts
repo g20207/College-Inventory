@@ -19,6 +19,9 @@ export class RoomDetailsComponent implements OnInit {
   // @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
   roomForm: FormGroup;
   Afs: any;
+  isEditing = false;
+  getValue: any;
+
 constructor(
   private formBuilder: FormBuilder,
   private router: Router,
@@ -28,14 +31,37 @@ constructor(
 {
   this.roomForm = new FormGroup({
   selectedRoom: new FormControl(),
+  selectedRoomNo: new FormControl()
   // selectedItem: new FormControl(),
   // brand: new FormControl(),
   // noOfItems: new FormControl()
   });
 }
 isEditMode:boolean = false;
-
+paramsObject: any = {};
 ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    if (params.id) {
+      this.paramsObject = params.id;
+      if(params.isEditing === 'true'){
+        this.isEditing = params.isEditing;
+      }
+    }
+  });
+
+  this.route.queryParams.subscribe(params => {
+    if (params.id && params.isEditing) {
+      this.isEditing = true;
+      this.paramsObject = params.id;
+      this.makeapi.getItem("room details", this.paramsObject).subscribe((res) => {
+        this.getValue = res;
+        console.log(this.getValue);
+        this.roomForm.patchValue(res);
+      }, (err) => {
+        // console.log('error occurred!');
+      });
+    }
+  });
   this.roomlist();
   this.additemslist();
 }
@@ -72,12 +98,11 @@ additemslist(){
 }
 selectedItem:string;
 nameChanged(row) {
-  const selectedItem = row.selectedItem;
-  const filteredList = this.additemsList.filter(additems => additems.ItemName === selectedItem);
+   this.selectedItem = row.selectedItem;
+  const filteredList = this.additemsList.filter(additems => additems.ItemName === this.selectedItem);
   row.brand = filteredList.length > 0 ? filteredList[0].Brand : '';
 //   filteredList.length > 0 checks if the filteredList array has at least one element. If it does, then the selected item has a corresponding brand value in the additemsList array.
 // If filteredList.length > 0 is true, filteredList[0].Brand returns the brand value of the first object in the filteredList array.
-// If filteredList.length > 0 is false, then the selected item does not have a corresponding brand value in the additemsList array, so '' (an empty string) is assigned to the brand property of the row object.
 }
 
 addRow() {
@@ -91,13 +116,10 @@ addRow() {
 }
 
 selectedRoomValue: string;
+selectedRoomnoValue: string;
+
 onSubmit() {
     var get = this.roomForm.value;
-    // this.makeapi
-    //   .addItem("room details", get)
-    //   .then((data) => {})
-    //   .catch((Response) => {
-    //   });
       const itemsData = [];
 
       for (let i = 0; i < this.myArray.length; i++) {
@@ -112,6 +134,8 @@ onSubmit() {
       // console.log(itemsData);
       const itemsObj = {
         selectedRoom: this.selectedRoomValue,
+        selectedRoomno: this.selectedRoomnoValue,
+
         itemsData: itemsData.reduce((obj, item) => {
           return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
         }, {})
@@ -122,5 +146,40 @@ onSubmit() {
       .catch((Response) => {
       });
   this.roomForm.reset();
+}
+onUpdate() {
+  var get = this.roomForm.value;
+    const itemsData = [];
+
+    for (let i = 0; i < this.myArray.length; i++) {
+      const item = this.myArray[i];
+      itemsData.push({
+        itemName: item.selectedItem,
+        brand: item.brand,
+        numOfItems: item.noOfItems
+      });
+    }
+
+    const itemsObj = {
+      selectedRoom: this.selectedRoomValue,
+      selectedRoomno: this.selectedRoomnoValue,
+
+      itemsData: itemsData.reduce((obj, item) => {
+        return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
+      }, {})
+    };
+    this.makeapi
+    .updateItem("room details", itemsObj)
+    .then((data) => {})
+    .catch((Response) => {
+    });
+    // console.log(itemsObj);
+    // this.isEditing = false;
+    this.router.navigateByUrl("room-details-landing");
+
+this.roomForm.reset();
+}
+deleteRow(index: number) {
+  this.myArray.splice(index, 1);
 }
 }

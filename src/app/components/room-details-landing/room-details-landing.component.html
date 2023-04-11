@@ -39,14 +39,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of itemsList; let i = index;">
+              <tr *ngFor="let item of roomdetailsList; let i = index;">
                 <td>{{ i + 1 }}</td>
-                <td>{{item.ItemName}}</td>
-                <td>{{item.ItemID}}</td>
-                <td>{{item.amount}}</td>
-                <td> &nbsp;&nbsp;&nbsp;<i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;<i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                <td>{{ item.selectedRoom }}</td>
+                <td>{{ item.selectedRoomno }}</td>
+                <td>{{ getKeys(item.itemsData)[0] ? item.itemsData[getKeys(item.itemsData)[0]].numOfItems : '' }}</td>
+                <td>
+                  <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;
+                  <i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>

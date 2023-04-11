@@ -87,18 +87,18 @@
   transition: all 0.3s ease;
 }
 .lens:hover {
-  background-color: rgb(249, 189, 249);
+  background-color: rgb(201, 249, 189);
 }
 .btn-outline-purple {
-  color: #af4c95;
+  color: green;
   background-color: transparent;
   background-image: none;
-  border-color: #af4c95;
+  border-color: green;
 }
 .btn-outline-purple:hover {
   color: #fff;
-  background-color: #af4c95;
-  border-color: #af4c95;
+  background-color: green;
+  border-color: green;
 }
 
 /* .add-button {
