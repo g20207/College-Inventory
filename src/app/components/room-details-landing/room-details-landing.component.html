@@ -42,8 +42,8 @@
               <tr *ngFor="let item of roomdetailsList; let i = index;">
                 <td>{{ i + 1 }}</td>
                 <td>{{ item.selectedRoom }}</td>
-                <td>{{ item.selectedRoomno }}</td>
-                <td>{{ getKeys(item.itemsData)[0] ? item.itemsData[getKeys(item.itemsData)[0]].numOfItems : '' }}</td>
+                <td>{{ item.selectedRoomNo }}</td>
+                <td>{{ item.totalRows }}</td>
                 <td>
                   <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;
                   <i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>

@@ -56,6 +56,9 @@
                     <option *ngFor="let item of additemsList" [value]="item.ItemName">{{item.ItemName}}</option>
                   </select>
                 </td>
+                <td *ngIf="isEditing && editedItem === item">
+                  <input type="text" class="form-control" [(ngModel)]="item.brand">
+                </td>
                 <td>{{item.brand}}</td>
                 <input type="number" class="form-control" style="width:100px;" [(ngModel)]="item.noOfItems">
                 <td>
@@ -63,6 +66,10 @@
                   <i style="color:red;" class="fa-solid fa-trash-arrow-up" (click)="deleteRow(i)"></i>
                 </td>
               </tr>
+
+
+
+
             </tbody>
 
           </table>

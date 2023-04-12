@@ -91,7 +91,6 @@ floorlist(){
       data.id = e.payload.doc.id;
       return data;
     })
-    // console.log(this.floorList);
   });
 }
 getValue: any;

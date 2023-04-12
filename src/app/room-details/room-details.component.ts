@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
@@ -15,8 +15,8 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ['./room-details.component.css']
 })
 export class RoomDetailsComponent implements OnInit {
-
-  // @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
+  // @Input() editedItem: any;
+  // @Input() isEditing: boolean;
   roomForm: FormGroup;
   Afs: any;
   isEditing = false;
@@ -32,9 +32,6 @@ constructor(
   this.roomForm = new FormGroup({
   selectedRoom: new FormControl(),
   selectedRoomNo: new FormControl()
-  // selectedItem: new FormControl(),
-  // brand: new FormControl(),
-  // noOfItems: new FormControl()
   });
 }
 isEditMode:boolean = false;
@@ -48,22 +45,20 @@ ngOnInit() {
       }
     }
   });
-
   this.route.queryParams.subscribe(params => {
     if (params.id && params.isEditing) {
       this.isEditing = true;
       this.paramsObject = params.id;
       this.makeapi.getItem("room details", this.paramsObject).subscribe((res) => {
         this.getValue = res;
-        console.log(this.getValue);
         this.roomForm.patchValue(res);
       }, (err) => {
-        // console.log('error occurred!');
       });
     }
   });
   this.roomlist();
   this.additemslist();
+  this.roomdetailslist();
 }
 myArray: any[] = [{
   id: 1,
@@ -83,7 +78,18 @@ roomlist(){
     })
   });
 }
-
+roomdetailsList:any=[];
+roomdetailslist(){
+  this.makeapi.listItem("room details")
+  .subscribe((res) => {
+    this.roomdetailsList = res.map((e: any) => {
+      const data = e.payload.doc.data();
+      data.id = e.payload.doc.id;
+      return data;
+    })
+  });
+  // console.log(this.roomdetailsList);
+}
 additemsList:any=[];
 additemslist(){
   this.makeapi.listItem("add-items")
@@ -119,33 +125,42 @@ selectedRoomValue: string;
 selectedRoomnoValue: string;
 
 onSubmit() {
-    var get = this.roomForm.value;
-      const itemsData = [];
+  var get = this.roomForm.value;
+  const itemsData = [];
 
-      for (let i = 0; i < this.myArray.length; i++) {
-        const item = this.myArray[i];
-        itemsData.push({
-          itemName: item.selectedItem,
-          brand: item.brand,
-          numOfItems: item.noOfItems
-        });
-      }
+  for (let i = 0; i < this.myArray.length; i++) {
+    const item = this.myArray[i];
+    itemsData.push({
+      itemName: item.selectedItem,
+      brand: item.brand,
+      numOfItems: item.noOfItems
+    });
+  }
 
-      // console.log(itemsData);
-      const itemsObj = {
-        selectedRoom: this.selectedRoomValue,
-        selectedRoomno: this.selectedRoomnoValue,
+  const itemsObj = {
+    selectedRoom: this.selectedRoomValue,
+    selectedRoomNo: this.selectedRoomnoValue,
+    itemsData: itemsData.reduce((obj, item) => {
+      return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
+    }, {}),
+    totalRows: this.myArray.length
+  };
 
-        itemsData: itemsData.reduce((obj, item) => {
-          return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
-        }, {})
-      };
-      this.makeapi
+  // some function returns true when the test is passed. here room in some(room) is a variable chosed by programmer. it takes the value in roomdetailsList and then executes the test.
+  const roomExists = this.roomdetailsList.some((room) => {
+    return room.selectedRoom === this.selectedRoomValue;
+  });
+
+  if (roomExists) {
+    alert('The selected room exists in Room Details page. you can edit it from there');
+  } else {
+    this.makeapi
       .addItem("room details", itemsObj)
       .then((data) => {})
-      .catch((Response) => {
-      });
-  this.roomForm.reset();
+      .catch((Response) => {});
+    // console.log(itemsObj);
+    this.roomForm.reset();
+  }
 }
 onUpdate() {
   var get = this.roomForm.value;
@@ -162,19 +177,18 @@ onUpdate() {
 
     const itemsObj = {
       selectedRoom: this.selectedRoomValue,
-      selectedRoomno: this.selectedRoomnoValue,
+      selectedRoomNo: this.selectedRoomnoValue,
 
       itemsData: itemsData.reduce((obj, item) => {
         return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
-      }, {})
+      }, {}),
+      lastSerialNumber: this.myArray.length > 0 && !isNaN(parseInt(this.myArray[this.myArray.length - 1].serialNumber, 10)) ? parseInt(this.myArray[this.myArray.length - 1].serialNumber, 10) + 1 : 1
     };
     this.makeapi
     .updateItem("room details", itemsObj)
     .then((data) => {})
     .catch((Response) => {
     });
-    // console.log(itemsObj);
-    // this.isEditing = false;
     this.router.navigateByUrl("room-details-landing");
 
 this.roomForm.reset();
