@@ -16,8 +16,8 @@
         <div class="table-controls">
           <div class="search">
             <div>
-              <input type="text" placeholder="Search">
-              <button type="submit" class="lens"><i class="fas fa-search"></i></button>
+              <input type="text" placeholder="Search by room name" #searchButton (input)="onInput()">
+              <button (click)="onSearch()" type="submit" class="lens"><i class="fas fa-search"></i></button>
             </div>
           </div>
                     <button routerLink="/room-details" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button>
@@ -39,16 +39,31 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of roomdetailsList; let i = index;">
-                <td>{{ i + 1 }}</td>
-                <td>{{ item.selectedRoom }}</td>
-                <td>{{ item.selectedRoomNo }}</td>
-                <td>{{ item.totalRows }}</td>
-                <td>
-                  <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;
-                  <i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
-                </td>
-              </tr>
+              <ng-container *ngIf="!isButtonClicked">
+                <tr *ngFor="let item of roomdetailsList; let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.selectedRoom }}</td>
+                  <td>{{ item.selectedRoomNo }}</td>
+                  <td>{{ item.totalRows }}</td>
+                  <td>
+                    <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;
+                    <i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="isButtonClicked">
+                <tr *ngFor="let item of getSearchItem(); let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.selectedRoom }}</td>
+                  <td>{{ item.selectedRoomNo }}</td>
+                  <td>{{ item.totalRows }}</td>
+                  <td>
+                    <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i>&nbsp;
+                    <i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+
 
             </tbody>
           </table>

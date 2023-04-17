@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ViewChild, ElementRef } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
@@ -16,6 +16,7 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ['./floor.component.css']
 })
 export class FloorComponent implements OnInit {
+  @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
 
   floorForm: FormGroup;
   Afs: any;
@@ -112,4 +113,18 @@ selectedCampusValue: string;
 getFilteredBlockList(): any[] {
   return this.blockList.filter(block => block.selectedOption === this.selectedCampusValue);
 }
+isButtonClicked: boolean = false;
+  searchValue:string;
+  onSearch() {
+    this.isButtonClicked = true;
+    this.searchValue = this.searchButton.nativeElement.value;
+  }
+  onInput() {
+    if (!this.searchButton.nativeElement.value) {
+      this.isButtonClicked = false;
+    }
+  }
+  getSearchItem(): any[] {
+    return this.floorList.filter(floor => floor.floor === this.searchValue);
+  }
 }

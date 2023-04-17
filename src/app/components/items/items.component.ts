@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ViewChild, ElementRef } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
@@ -15,6 +15,7 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
+  @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
 
   roomForm: FormGroup;
   Afs: any;
@@ -132,4 +133,18 @@ selectedRoomValue: string;
 filteredRoomDetails(): any[] {
   return this.itemsList.filter(items => items.selectedRoom === this.selectedRoomValue);
 }
+isButtonClicked: boolean = false;
+  searchValue:string;
+  onSearch() {
+    this.isButtonClicked = true;
+    this.searchValue = this.searchButton.nativeElement.value;
+  }
+  onInput() {
+    if (!this.searchButton.nativeElement.value) {
+      this.isButtonClicked = false;
+    }
+  }
+  getSearchItem(): any[] {
+    return this.itemsList.filter(item => item.ItemName === this.searchValue);
+  }
 }

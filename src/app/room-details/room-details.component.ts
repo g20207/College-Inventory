@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input,ViewChild, ElementRef  } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {FormGroup,FormControl, FormBuilder,Validators,FormArray} from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -12,6 +12,8 @@ import { ResponseData } from 'src/app/interfaces/response-data.interface';
   styleUrls: ['./room-details.component.css']
 })
 export class RoomDetailsComponent implements OnInit {
+  @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
+
   roomForm: FormGroup;Afs: any; isEditing = false; getValue: any; ;
 constructor(private formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute,private makeapi: ApiService
 )
@@ -176,7 +178,7 @@ onUpdate() {
       selectedRoomNo: this.selectedRoomnoValue,
 
       itemsData: itemsData.reduce((obj, item) => {
-        return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
+        return {...obj, [item.itemName]: {item: item.itemName,brand: item.brand, numOfItems: item.numOfItems}};
       }, {}),
       totalRows: this.myArray.length
     };
@@ -194,4 +196,5 @@ deleteRow(index: number) {
 cancel(){
   this.router.navigateByUrl("room-details-landing");
 }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ViewChild, ElementRef } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
@@ -17,7 +17,7 @@ declare var $:any;
   styleUrls: ['./room-details-landing.component.css']
 })
 export class RoomDetailsLandingComponent implements OnInit {
-
+  @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -49,5 +49,18 @@ export class RoomDetailsLandingComponent implements OnInit {
   getKeys(obj: any): string[] {
     return Object.keys(obj);
   }
-
+  isButtonClicked: boolean = false;
+  searchValue:string;
+  onSearch() {
+    this.isButtonClicked = true;
+    this.searchValue = this.searchButton.nativeElement.value;
+  }
+  onInput() {
+    if (!this.searchButton.nativeElement.value) {
+      this.isButtonClicked = false;
+    }
+  }
+  getSearchItem(): any[] {
+    return this.roomdetailsList.filter(room => room.selectedRoom === this.searchValue);
+  }
 }

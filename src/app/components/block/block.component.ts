@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ViewChild, ElementRef } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
 import {
   FormGroup,
@@ -16,6 +16,8 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ['./block.component.css']
 })
 export class BlockComponent implements OnInit {
+  @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
+
   blockForm: FormGroup;
     Afs: any;
   constructor(
@@ -93,5 +95,18 @@ export class BlockComponent implements OnInit {
   remove(i){
     this.makeapi.deleteItem("block", i);
   }
-
+  isButtonClicked: boolean = false;
+  searchValue:string;
+  onSearch() {
+    this.isButtonClicked = true;
+    this.searchValue = this.searchButton.nativeElement.value;
+  }
+  onInput() {
+    if (!this.searchButton.nativeElement.value) {
+      this.isButtonClicked = false;
+    }
+  }
+  getSearchItem(): any[] {
+    return this.blockList.filter(block => block.block === this.searchValue);
+  }
 }

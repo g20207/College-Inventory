@@ -48,12 +48,12 @@
       <div class="table-header">
         <p style="height:10px;"><strong>BLOCK LIST</strong></p>
         <div class="table-controls">
-          <!-- <div class="search">
+          <div class="search">
             <div>
-              <input type="text" placeholder="Search">
-              <button type="submit" class="lens"><i class="fas fa-search"></i></button>
+              <input type="text" placeholder="Search by block" #searchButton (input)="onInput()">
+              <button (click)="onSearch()" type="submit" class="lens"><i class="fas fa-search"></i></button>
             </div>
-          </div> -->
+          </div>
           <!-- <button (click)="onClick()" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button> -->
         </div>
       </div>
@@ -73,14 +73,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of blockList; let i = index;">
-                <td class="column1">{{ i + 1 }}</td>
-                <td class="column2">{{item.selectedOption}}</td>
-                <td class="column2">{{item.block}}</td>
-                <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
-                <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
-                </td>
-              </tr>
+              <ng-container *ngIf="!isButtonClicked">
+                <tr *ngFor="let item of blockList; let i = index;">
+                  <td class="column1">{{ i + 1 }}</td>
+                  <td class="column2">{{item.selectedOption}}</td>
+                  <td class="column2">{{item.block}}</td>
+                  <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
+                  <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="isButtonClicked">
+                <tr *ngFor="let item of getSearchItem(); let i = index;">
+                  <td class="column1">{{ i + 1 }}</td>
+                  <td class="column2">{{item.selectedOption}}</td>
+                  <td class="column2">{{item.block}}</td>
+                  <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
+                  <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+
             </tbody>
           </table>
         </div>
