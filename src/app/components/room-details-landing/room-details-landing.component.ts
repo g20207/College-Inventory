@@ -39,7 +39,6 @@ export class RoomDetailsLandingComponent implements OnInit {
         return data;
       })
     });
-    console.log(this.roomdetailsList);
   }
   edit(itemId: string) {
     this.router.navigate(['room-details'], { queryParams: { id: itemId, isEditing: true } });

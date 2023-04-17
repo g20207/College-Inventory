@@ -1,40 +1,29 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { AngularFirestoreCollection } from "@angular/fire/firestore";
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from "@angular/forms";
+import {FormGroup,FormControl, FormBuilder,Validators,FormArray} from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { ApiService } from "src/app/services/api.service";
+import { ResponseData } from 'src/app/interfaces/response-data.interface';
+
 @Component({
   selector: 'app-room-details',
   templateUrl: './room-details.component.html',
   styleUrls: ['./room-details.component.css']
 })
 export class RoomDetailsComponent implements OnInit {
-  // @Input() editedItem: any;
-  // @Input() isEditing: boolean;
-  roomForm: FormGroup;
-  Afs: any;
-  isEditing = false;
-  getValue: any;
-
-constructor(
-  private formBuilder: FormBuilder,
-  private router: Router,
-  private route: ActivatedRoute,
-  private makeapi: ApiService
+  roomForm: FormGroup;Afs: any; isEditing = false; getValue: any; ;
+constructor(private formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute,private makeapi: ApiService
 )
 {
   this.roomForm = new FormGroup({
   selectedRoom: new FormControl(),
   selectedRoomNo: new FormControl()
   });
+  // this.tableForm = new FormGroup({
+  //   itemsArray: new FormArray([])
+  //   });
 }
-isEditMode:boolean = false;
 paramsObject: any = {};
 ngOnInit() {
   this.route.queryParams.subscribe(params => {
@@ -49,16 +38,23 @@ ngOnInit() {
     if (params.id && params.isEditing) {
       this.isEditing = true;
       this.paramsObject = params.id;
-      this.makeapi.getItem("room details", this.paramsObject).subscribe((res) => {
-        this.getValue = res;
+      this.makeapi.getItem("room details", this.paramsObject).subscribe((res: ResponseData) => {
+        console.log(res); // to verify if the data is fetched correctly
         this.roomForm.patchValue(res);
+        if (this.isEditing) {
+          this.myArray = Object.keys(res.itemsData).map((key) => ({
+            selectedItem: res.itemsData[key].item,
+            brand: res.itemsData[key].brand,
+            noOfItems: res.itemsData[key].numOfItems
+          }));
+        }
       }, (err) => {
+        console.error(err);
       });
     }
   });
-  this.roomlist();
-  this.additemslist();
-  this.roomdetailslist();
+
+  this.roomlist();this.additemslist();this.roomdetailslist();
 }
 myArray: any[] = [{
   id: 1,
@@ -77,6 +73,7 @@ roomlist(){
       return data;
     })
   });
+  // console.log(this.roomList)
 }
 roomdetailsList:any=[];
 roomdetailslist(){
@@ -88,8 +85,8 @@ roomdetailslist(){
       return data;
     })
   });
-  // console.log(this.roomdetailsList);
 }
+
 additemsList:any=[];
 additemslist(){
   this.makeapi.listItem("add-items")
@@ -100,7 +97,6 @@ additemslist(){
       return data;
     })
   });
-// console.log(this.additemsList);
 }
 selectedItem:string;
 nameChanged(row) {
@@ -136,15 +132,16 @@ onSubmit() {
       numOfItems: item.noOfItems
     });
   }
-
+// console.log(itemsData);
   const itemsObj = {
     selectedRoom: this.selectedRoomValue,
     selectedRoomNo: this.selectedRoomnoValue,
     itemsData: itemsData.reduce((obj, item) => {
-      return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
+      return {...obj, [item.itemName]: {item: item.itemName,brand: item.brand, numOfItems: item.numOfItems}};
     }, {}),
     totalRows: this.myArray.length
   };
+  console.log(itemsObj);
 
   // some function returns true when the test is passed. here room in some(room) is a variable chosed by programmer. it takes the value in roomdetailsList and then executes the test.
   const roomExists = this.roomdetailsList.some((room) => {
@@ -158,7 +155,6 @@ onSubmit() {
       .addItem("room details", itemsObj)
       .then((data) => {})
       .catch((Response) => {});
-    // console.log(itemsObj);
     this.roomForm.reset();
   }
 }
@@ -171,7 +167,7 @@ onUpdate() {
       itemsData.push({
         itemName: item.selectedItem,
         brand: item.brand,
-        numOfItems: item.noOfItems
+        numOfItems: item.noOfItems,
       });
     }
 
@@ -182,7 +178,7 @@ onUpdate() {
       itemsData: itemsData.reduce((obj, item) => {
         return {...obj, [item.itemName]: {brand: item.brand, numOfItems: item.numOfItems}};
       }, {}),
-      lastSerialNumber: this.myArray.length > 0 && !isNaN(parseInt(this.myArray[this.myArray.length - 1].serialNumber, 10)) ? parseInt(this.myArray[this.myArray.length - 1].serialNumber, 10) + 1 : 1
+      totalRows: this.myArray.length
     };
     this.makeapi
     .updateItem("room details", itemsObj)
@@ -190,10 +186,12 @@ onUpdate() {
     .catch((Response) => {
     });
     this.router.navigateByUrl("room-details-landing");
-
 this.roomForm.reset();
 }
 deleteRow(index: number) {
   this.myArray.splice(index, 1);
+}
+cancel(){
+  this.router.navigateByUrl("room-details-landing");
 }
 }
