@@ -93,7 +93,7 @@ export class AddItemsComponent implements OnInit {
     this.makeapi.updateItem("items",get);
     this.isEditing = false;
     this.AddForm.reset();
-    this.router.navigateByUrl("items");
+    this.router.navigateByUrl("item-details");
   }
 
   campList:any=[];

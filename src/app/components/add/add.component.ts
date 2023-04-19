@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.AddForm = this.fb.group({
       ItemName: ['', [Validators.required, Validators.minLength(2)]],
-      ItemID: [''],
+      ItemID: ['',Validators.required],
       amount: ['', [Validators.required, Validators.minLength(2)]],
       Brand: ['', [Validators.required]],
       warranty: [false, Validators.requiredTrue],
@@ -99,7 +99,6 @@ export class AddComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
-      // console.log(this.campList);
     });
   }
   blockList:any=[];
@@ -111,7 +110,6 @@ export class AddComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
-      // console.log(this.blockList);
     });
   }
   floorList:any=[];
@@ -123,7 +121,6 @@ export class AddComponent implements OnInit {
         data.id = e.payload.doc.id;
         return data;
       })
-      // console.log(this.floorList);
     });
   }
   roomList:any=[];
@@ -135,7 +132,6 @@ roomlist(){
       data.id = e.payload.doc.id;
       return data;
     })
-    // console.log(this.roomList);
   });
 }
   itemsList:any=[];

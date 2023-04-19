@@ -9,10 +9,10 @@
             <div *ngIf="loginForm.controls.name.invalid && (loginForm.controls.name.dirty || loginForm.controls.name.touched)">
               <div class="alert alert-danger" *ngIf="loginForm.controls.name.errors.required">Username is required</div>
             </div>
-            <input type="text" placeholder="PASSWORD" formControlName="password">
+            <input type="password" placeholder="PASSWORD" formControlName="password">
             <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
               <div class="alert alert-danger" *ngIf="loginForm.controls.password.errors.required">Password is required</div>
-              <div class="alert alert-danger" *ngIf="loginForm.controls.password.errors?.minlength">Password should have at least 8 characters</div>
+              <div class="alert alert-danger" *ngIf="loginForm.controls.password.errors?.minlength">Password should have at least 6 characters</div>
             </div>
             <button class="submit" (click)="SubmitBtn()">login</button>
           </form>
@@ -21,7 +21,7 @@
 			<div class="right">
 				<div class="right-text">
 					<h2>20207</h2>
-					<h5>COLLEGE INVENTORY SYSTEM</h5>
+					<h5>COLLEGE INVENTORY MANAGEMENT</h5>
 				</div>
 			</div>
 		</div>

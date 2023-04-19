@@ -19,16 +19,22 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       name: ["", Validators.required],
-      password: ["", [Validators.required, Validators.minLength(8)]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
     });
   }
-
   SubmitBtn() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-    } else {
+    }
+    else if (this.loginForm.get("name").value === "guru" && this.loginForm.get("password").value === "guru07") {
       this.router.navigate(["/campus"]);
-      
+    }
+    else if (this.loginForm.get("name").value === "employee" && this.loginForm.get("password").value === "employee07") {
+      this.router.navigate(["/campus"]);
+    }
+    else {
+      alert("invalid username or password!");
     }
   }
+
 }

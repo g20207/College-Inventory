@@ -46,14 +46,14 @@
       </div>
       <div class="col-md-4 mb-3">
         <label class="form-label">Number of items:</label>
-        <input type="tel" class="form-control form-control-sm" formControlName="itemno">
+        <input type="number" class="form-control form-control-sm" formControlName="itemno">
         <div *ngIf="AddForm.get('itemno').invalid && (AddForm.get('itemno').dirty || AddForm.get('itemno').touched)" class="alert alert-danger">
           <div *ngIf="AddForm.get('itemno').errors.required">Number of items  is required.</div>
         </div>
       </div>
       <div class="col-md-4 mb-3">
         <label class="form-label">Amount:</label>
-        <input type="text" class="form-control form-control-sm" formControlName="amount">
+        <input type="NUMBER" class="form-control form-control-sm" formControlName="amount">
         <div *ngIf="AddForm.get('amount').invalid && (AddForm.get('amount').dirty || AddForm.get('amount').touched)" class="alert alert-danger">
           <div *ngIf="AddForm.get('amount').errors.required">Amount is required.</div>
           <div *ngIf="AddForm.get('amount').errors.minlength">Amount must be at least 2 characters long.</div>
@@ -67,25 +67,6 @@
           <div *ngIf="AddForm.get('description').errors.minlength">Description must be at least 2 characters long.</div>
         </div>
       </div>
-      <!-- <div class="col-md-4 mb-3">
-        <div class="form-check" style="padding-top:30px;">
-          <label class="form-check-label">Warranty</label>
-          <input type="checkbox" class="form-check-input " formControlName="warranty">
-          <div *ngIf="warranty.invalid && (warranty.dirty || warranty.touched)">
-            <div *ngIf="warranty.errors.requiredTrue">You must agree to the terms and conditions</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="form-check" style="padding-top:30px;">
-          <label class="form-check-label">Warranty Claim</label>
-          <input type="checkbox" class="form-check-input " formControlName="warrantyClaim" >
-          <div *ngIf="warranty.invalid && (warranty.dirty || warranty.touched)">
-            <div *ngIf="warranty.errors.requiredTrue">The field is required</div>
-          </div>
-        </div>
-      </div> -->
-
     </div>
     <div class="row mt-3">
       <div class="col-md-12 text-end">
