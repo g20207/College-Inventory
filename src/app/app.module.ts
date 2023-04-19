@@ -5,11 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { BlockComponent } from './components/block/block.component';
-import { ProductsComponent } from './components/products/products.component';
-import { MappingComponent } from './components/mapping/mapping.component';
-import { FiltersComponent } from './components/filters/filters.component';
 import { NavpageComponent } from './components/navpage/navpage.component';
-import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { AddComponent } from './components/add/add.component';
@@ -30,16 +26,13 @@ import { AddItemsComponent } from './components/add-items/add-items.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { RoomDetailsComponent } from './room-details/room-details.component';
 import { RoomDetailsLandingComponent } from './components/room-details-landing/room-details-landing.component';
+import { AuthService } from './services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     BlockComponent,
-    ProductsComponent,
-    MappingComponent,
-    FiltersComponent,
     NavpageComponent,
-    HomeComponent,
     TopbarComponent,
     AddComponent,
     CampusComponent,
@@ -62,7 +55,8 @@ import { RoomDetailsLandingComponent } from './components/room-details-landing/r
     AngularFirestoreModule,
     FormsModule
   ],
-  providers: [DataService,ApiService],
+  providers: [DataService,ApiService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

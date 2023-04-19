@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -7,7 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
   }
