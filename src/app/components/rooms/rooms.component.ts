@@ -151,4 +151,21 @@ isButtonClicked: boolean = false;
   getSearchItem(): any[] {
     return this.roomList.filter(room => room.room === this.searchValue);
   }
+  selectedFloorValue:string;
+filteredFloorDetails(): any[] {
+  return this.roomList.filter(rooms =>
+    rooms.selectedCampus === this.selectedCampusValue &&
+    rooms.selectedBlock === this.selectedBlockValue &&
+     rooms.selectedFloor === this.selectedFloorValue
+     );
+}
+filteredBlockDetails(): any[] {
+  return this.roomList.filter(floor =>
+    floor.selectedCampus === this.selectedCampusValue &&
+    floor.selectedBlock === this.selectedBlockValue
+    );
+}
+filteredCampusDetails(): any[] {
+  return this.roomList.filter(block => block.selectedCampus === this.selectedCampusValue);
+}
 }

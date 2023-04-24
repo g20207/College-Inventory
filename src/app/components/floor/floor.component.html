@@ -2,7 +2,6 @@
 <!-- breadcrumb -->
 <div class="breadcrumb">
   <div class="breadcrumb-heading">FLOOR DETAILS</div>
-  <!-- <div class="breadcrumb-path">path1 &nbsp; &gt; &nbsp; path2</div> -->
 </div>
 <!-- breadcrumb ends -->
 
@@ -24,7 +23,7 @@
           </div>
           <label style="padding-top:10px;">Select Block:</label>
           <div class="form-group">
-  <select formControlName="selectedBlock" class="form-control caret" >
+  <select formControlName="selectedBlock" class="form-control" [(ngModel)]="selectedBlockValue">
       <option *ngFor="let item of getFilteredBlockList()" [value]="item.block">{{item.block}}</option>
   </select>
           </div>
@@ -66,7 +65,6 @@
       <!-- table heading with search bar ends-->
 
       <div class="">
-        <!-- below class is for responsiveness -->
         <div class="table-responsive">
           <table class="table ">
             <thead class="row-heading">
@@ -80,7 +78,29 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="!isButtonClicked">
+              <ng-container *ngIf="!isButtonClicked && selectedCampusValue && !selectedBlockValue">
+                <tr *ngFor="let item of filteredCampusDetails(); let i = index;">
+                  <td class="column1">{{ i + 1 }}</td>
+                  <td class="column2">{{item.selectedCampus}}</td>
+                  <td class="column2">{{item.selectedBlock}}</td>
+                  <td class="column2">{{item.floor}}</td>
+                  <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
+                  <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!isButtonClicked && selectedCampusValue && selectedBlockValue">
+                <tr *ngFor="let item of filteredBlockDetails(); let i = index;">
+                  <td class="column1">{{ i + 1 }}</td>
+                  <td class="column2">{{item.selectedCampus}}</td>
+                  <td class="column2">{{item.selectedBlock}}</td>
+                  <td class="column2">{{item.floor}}</td>
+                  <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
+                  <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!isButtonClicked && !selectedCampusValue && !selectedBlockValue">
                 <tr *ngFor="let item of floorList; let i = index;">
                   <td class="column1">{{ i + 1 }}</td>
                   <td class="column2">{{item.selectedCampus}}</td>

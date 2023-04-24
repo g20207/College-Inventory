@@ -114,4 +114,9 @@ export class BlockComponent implements OnInit {
   getSearchItem(): any[] {
     return this.blockList.filter(block => block.block === this.searchValue);
   }
+  selectedCampusValue: string;
+
+  filteredCampusDetails(): any[] {
+    return this.blockList.filter(block => block.selectedOption === this.selectedCampusValue);
+  }
 }

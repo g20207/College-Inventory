@@ -133,4 +133,14 @@ isButtonClicked: boolean = false;
   getSearchItem(): any[] {
     return this.floorList.filter(floor => floor.floor === this.searchValue);
   }
+  selectedBlockValue: string;
+  filteredBlockDetails(): any[] {
+    return this.floorList.filter(floor =>
+      floor.selectedCampus === this.selectedCampusValue &&
+      floor.selectedBlock === this.selectedBlockValue
+      );
+  }
+  filteredCampusDetails(): any[] {
+    return this.floorList.filter(floor => floor.selectedCampus === this.selectedCampusValue);
+  }
 }

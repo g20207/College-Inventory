@@ -17,7 +17,7 @@
           <label>Select Campus:</label>
           <div class="form-group">
 
-  <select formControlName="selectedOption" class="form-control caret">
+  <select formControlName="selectedOption" class="form-control caret" [(ngModel)]="selectedCampusValue">
     <option *ngFor="let item of campList" [value]="item.campus">{{item.campus}}</option>
   </select>
           </div>
@@ -54,7 +54,6 @@
               <button (click)="onSearch()" type="submit" class="lens"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <!-- <button (click)="onClick()" class="add-button"><i class="fa fa-plus"></i>&nbsp;Add</button> -->
         </div>
       </div>
       <!-- table heading with search bar ends-->
@@ -73,8 +72,18 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngIf="!isButtonClicked">
+              <ng-container *ngIf="!isButtonClicked && !selectedCampusValue">
                 <tr *ngFor="let item of blockList; let i = index;">
+                  <td class="column1">{{ i + 1 }}</td>
+                  <td class="column2">{{item.selectedOption}}</td>
+                  <td class="column2">{{item.block}}</td>
+                  <td class="column3"> <i (click)="edit(item.id)" class="fa-solid fa-pen-to-square"></i></td>
+                  <td class="column4"><i (click)="remove(item.id)" class="fa-solid fa-trash-arrow-up"></i>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!isButtonClicked && selectedCampusValue">
+                <tr *ngFor="let item of filteredCampusDetails(); let i = index;">
                   <td class="column1">{{ i + 1 }}</td>
                   <td class="column2">{{item.selectedOption}}</td>
                   <td class="column2">{{item.block}}</td>
