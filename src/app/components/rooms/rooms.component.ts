@@ -45,12 +45,17 @@ ngOnInit() {
 onSubmit() {
   this.isEditMode = false;
     var get = this.roomForm.value;
-    this.makeapi
+    if (this.roomList.some(room => room.selectedBlock === get.selectedBlock && room.selectedCampus===get.selectedCampus && room.selectedFloor === get.selectedFloor && room.room === get.room)) {
+      alert("room already exists!");
+    }
+    else{
+      this.makeapi
       .addItem("rooms", get)
       .then((data) => {})
       .catch((Response) => {
         this.roomlist();
       });
+    }
   this.roomForm.reset();
 }
 

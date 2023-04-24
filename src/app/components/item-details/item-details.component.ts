@@ -35,9 +35,6 @@ constructor(
 isEditMode:boolean = false;
 
 ngOnInit() {
-  $(document).ready(function () {
-    $('#myTable').DataTable();
-  });
   this.camplist();
   this.blocklist();
   this.floorlist();
@@ -45,7 +42,6 @@ ngOnInit() {
   this.itemslist();
 }
 onSubmit() {
-
     var get = this.roomForm.value;
     this.makeapi
       .addItem("rooms", get)

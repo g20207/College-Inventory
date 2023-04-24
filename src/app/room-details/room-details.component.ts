@@ -22,9 +22,6 @@ constructor(private formBuilder: FormBuilder,private router: Router,private rout
   selectedRoom: new FormControl(),
   selectedRoomNo: new FormControl()
   });
-  // this.tableForm = new FormGroup({
-  //   itemsArray: new FormArray([])
-  //   });
 }
 paramsObject: any = {};
 ngOnInit() {

@@ -35,8 +35,6 @@ export class AddItemsComponent implements OnInit {
       selectedBlock:['', [Validators.required]],
       selectedFloor:['', [Validators.required]],
       selectedRoom:['', [Validators.required]],
-      // warranty: [false, Validators.requiredTrue],
-      // warrantyClaim: [false,Validators.requiredTrue],
       description: ['',[Validators.required, Validators.minLength(2)]]
     });
     this.route.queryParams.subscribe(params => {
@@ -45,9 +43,6 @@ export class AddItemsComponent implements OnInit {
         if(params.isEditing === 'true'){
           this.isEditing = params.isEditing;
         }
-        // this.isEditing = params.isEditing === 'true';
-         // Convert the string value to a boolean
-        // Fetch the item details using params.id and populate the form fields
       }
     });
 
@@ -78,12 +73,16 @@ export class AddItemsComponent implements OnInit {
     } else {
       this.isEditMode = false;
       var get = this.AddForm.value;
-      this.makeapi
+      if (this.itemsList.some(item => item.selectedBlock === get.selectedBlock && item.selectedCampus===get.selectedCampus && item.selectedFloor === get.selectedFloor  && item.selectedRoom === get.selectedRoom && item.ItemName === get.ItemName)) {
+        alert("The Item already exists in this room");
+      }
+      else{
+        this.makeapi
         .addItem("items", get)
         .then((data) => {})
         .catch((Response) => {
         });
-
+      }
     this.AddForm.reset();
     }
   }

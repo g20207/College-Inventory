@@ -43,12 +43,18 @@ onSubmit() {
   this.isEditMode = false;
 
     var get = this.floorForm.value;
-    this.makeapi
+    if (this.floorList.some(floor => floor.selectedBlock === get.selectedBlock && floor.selectedCampus===get.selectedCampus && floor.floor === get.floor)) {
+      alert("floor already exists!");
+    }
+    else{
+      this.makeapi
       .addItem("floor", get)
       .then((data) => {})
       .catch((Response) => {
         this.floorlist();
       });
+    }
+
   this.floorForm.reset();
 }
 

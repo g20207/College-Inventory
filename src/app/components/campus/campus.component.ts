@@ -17,7 +17,7 @@ import { ApiService } from "src/app/services/api.service";
 })
 export class CampusComponent implements OnInit {
   @ViewChild('searchButton', {static: false}) searchButton: ElementRef;
-
+  campList:any=[];
   Afs: any;
   constructor(
     private formBuilder: FormBuilder,
@@ -45,15 +45,21 @@ export class CampusComponent implements OnInit {
       console.log("error occured !")
     } else {
       var get = this.campusForm.value;
-      this.makeapi
-        .addItem("campus", get)
-        .then((data) => {})
-        .catch((Response) => {
-          this.list();
-        });
+      if (this.campList.some(campus => campus.campus === get.campus)) {
+        alert("Campus already exists!");
+      } else {
+        this.makeapi
+          .addItem("campus", get)
+          .then((data) => {})
+          .catch((Response) => {
+            this.list();
+          });
+        this.campList.push({ campus: get.campus }); // Add the new campus to the campList array
+      }
     }
     this.campusForm.reset();
   }
+
 
   onEdit(){
     var get = this.campusForm.value;
@@ -64,7 +70,6 @@ export class CampusComponent implements OnInit {
     this. list()
   }
 
-  campList:any=[];
   list() {
     this.makeapi.listItem("campus")
     .subscribe((res) => {

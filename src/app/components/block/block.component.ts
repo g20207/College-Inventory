@@ -41,13 +41,18 @@ export class BlockComponent implements OnInit {
   onSubmit() {
     this.isEditMode = false;
       var get = this.blockForm.value;
+      if (this.blockList.some(block => block.block === get.block && block.selectedOption===get.selectedOption)) {
+        alert("block already exists!");
+      }
+      else{
       this.makeapi
         .addItem("block", get)
         .then((data) => {})
         .catch((Response) => {
-          this.camplist();
         });
+      }
       this.blockForm.reset();
+
   }
 
   onUpdate(){
